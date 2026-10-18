@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7DDE5">
+<title>QUEEN STUDY PLANNER — مخطّط الدراسة الملكي</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Poppins:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF7F7; --bg2:#FDECEF; --card:#FFFCF9; --card2:#FFF3F5;
+  --ink:#66545A; --ink-soft:#A1818D; --ink-faint:#C4A9B4;
+  --rose:#D99AAE; --rose-deep:#C58B91; --rose-strong:#C4748C; --rose-soft:#E8B7C5; --rose-pale:#F7DDE5;
+  --lav:#E9E2F5; --lav-deep:#B7A6E3;
+  --gold:#D9A441; --gold-soft:#F3C969; --gold-pale:#F9E7BD;
+  --line:#F2DCE3; --good:#7FB285; --bad:#D96A6A;
+  --shadow:0 12px 32px rgba(197,139,145,.16); --shadow-sm:0 6px 18px rgba(197,139,145,.12);
+  --grad-rose:linear-gradient(135deg,#E8A2B8,#D99AAE 55%,#C58B91);
+  --grad-gold:linear-gradient(135deg,#F6D68A,#E9B95C 55%,#D9A441);
+}
+[data-theme="night"]{
+  --bg:#211832; --bg2:#2A1E42; --card:#2E2349; --card2:#372A58;
+  --ink:#F1E9FA; --ink-soft:#C3B2E2; --ink-faint:#8E7BB8;
+  --rose-pale:#3D2C63; --lav:#3A2C63; --line:#483A73;
+  --shadow:0 12px 32px rgba(8,4,20,.45); --shadow-sm:0 6px 18px rgba(8,4,20,.4);
+}
+*{scrollbar-width:thin;scrollbar-color:var(--rose-soft) transparent}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:var(--rose-soft);border-radius:99px}
+::selection{background:var(--rose-soft);color:#fff}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Tajawal',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 85% -5%, var(--rose-pale) 0%, transparent 55%),
+    radial-gradient(800px 480px at -10% 30%, var(--lav) 0%, transparent 50%),
+    linear-gradient(165deg,var(--bg) 0%,var(--bg2) 140%);
+  min-height:100dvh; overflow-x:hidden;
+}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(217,154,174,.16) 1.2px, transparent 1.3px);background-size:26px 26px;}
+.font-en{font-family:'Poppins','Tajawal',sans-serif}
+.font-display{font-family:'Playfair Display','Poppins',serif}
+.font-poem{font-family:'Amiri','Tajawal',serif}
+.ltr{direction:ltr;unicode-bidi:embed}
+#petals{position:fixed;inset:0;z-index:70;pointer-events:none;transition:opacity .6s}
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow-sm)}
+.q-card-gold{background:var(--card);border:1px solid rgba(217,164,65,.5);border-radius:26px;box-shadow:var(--shadow), inset 0 0 0 5px var(--card), inset 0 0 0 6px rgba(217,164,65,.28)}
+.q-soft{background:var(--card2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:999px;
+  padding:.65rem 1.35rem;font-size:.95rem;transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,background .25s,opacity .2s;
+  cursor:pointer;border:1px solid transparent;position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;user-select:none}
+.btn:active{transform:scale(.95)}
+.btn svg{width:1.15em;height:1.15em;flex:none}
+.btn-primary{background:var(--grad-rose);color:#fff;box-shadow:0 10px 24px rgba(197,116,140,.38), inset 0 1px 0 rgba(255,255,255,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(197,116,140,.45), inset 0 1px 0 rgba(255,255,255,.45)}
+.btn-gold{background:var(--grad-gold);color:#6d4c08;box-shadow:0 10px 24px rgba(217,164,65,.35), inset 0 1px 0 rgba(255,255,255,.6)}
+.btn-gold:hover{transform:translateY(-2px)}
+.btn-soft{background:var(--rose-pale);color:var(--rose-strong)}
+[data-theme="night"] .btn-soft{color:#F3C6D6}
+.btn-soft:hover{background:var(--rose-soft);color:#fff;transform:translateY(-1px)}
+.btn-ghost{background:var(--card);border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--rose-soft);color:var(--rose-strong);transform:translateY(-1px)}
+.btn-sm{padding:.42rem .95rem;font-size:.83rem}
+.btn-icon{width:2.6rem;height:2.6rem;padding:0;border-radius:50%;flex:none}
+.btn-icon.btn-sm{width:2.15rem;height:2.15rem}
+.btn:disabled{opacity:.45;pointer-events:none}
+.ripple-ink{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);transform:scale(0);pointer-events:none;animation:rip .55s ease-out forwards}
+@keyframes rip{to{transform:scale(2.6);opacity:0}}
+.q-input{width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:15px;padding:.62rem .95rem;
+  color:var(--ink);font-family:inherit;font-size:.95rem;transition:border-color .2s, box-shadow .2s;outline:none}
+.q-input:focus{border-color:var(--rose);box-shadow:0 0 0 4px rgba(217,154,174,.18)}
+.q-label{display:block;font-size:.8rem;font-weight:700;color:var(--ink-soft);margin-bottom:.3rem}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.34rem .85rem;border-radius:999px;font-size:.82rem;font-weight:700;
+  background:var(--card);border:1.5px solid var(--line);color:var(--ink-soft);cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.chip svg{width:1em;height:1em}
+.chip:hover{border-color:var(--rose-soft);transform:translateY(-1px)}
+.chip.on{background:var(--grad-rose);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(197,116,140,.35)}
+.switch{position:relative;width:52px;height:29px;flex:none;cursor:pointer}
+.switch input{display:none}
+.switch i{position:absolute;inset:0;background:var(--line);border-radius:999px;transition:.25s}
+.switch i::after{content:'';position:absolute;top:3px;inset-inline-start:3px;width:23px;height:23px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18);transition:.25s cubic-bezier(.34,1.56,.64,1)}
+.switch input:checked + i{background:var(--grad-rose)}
+.switch input:checked + i::after{transform:translateX(-23px)}
+.gold-orn{display:flex;align-items:center;gap:.7rem;justify-content:center}
+.gold-orn span{height:1px;width:74px;background:linear-gradient(90deg,transparent,var(--gold))}
+.gold-orn span:last-child{background:linear-gradient(90deg,var(--gold),transparent)}
+.gold-orn i{width:9px;height:9px;background:var(--grad-gold);transform:rotate(45deg);border-radius:2px;box-shadow:0 0 10px rgba(217,164,65,.6)}
+.sec-title{display:flex;align-items:center;gap:.6rem;font-weight:900;font-size:1.28rem;color:var(--ink)}
+.sec-title .ic{width:2.3rem;height:2.3rem;border-radius:14px;background:var(--rose-pale);color:var(--rose-strong);display:grid;place-items:center;flex:none}
+.sec-title .ic svg{width:1.25rem;height:1.25rem}
+/* ---------- App shell / nav ---------- */
+#app{transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1),visibility .7s;position:relative;z-index:10}
+#app.app-hidden{opacity:0;visibility:hidden;transform:scale(1.045);pointer-events:none}
+.view{display:none}
+.view.active{display:block}
+main{perspective:1400px}
+.nav-btn{display:flex;align-items:center;gap:.75rem;width:100%;padding:.72rem 1rem;border-radius:16px;font-weight:700;color:var(--ink-soft);
+  transition:all .25s;cursor:pointer;border:1px solid transparent;text-align:start}
+.nav-btn svg{width:1.3rem;height:1.3rem;transition:transform .3s cubic-bezier(.34,1.8,.64,1)}
+.nav-btn:hover{background:var(--card2);color:var(--rose-strong);transform:translateX(-3px)}
+.nav-btn:hover svg{transform:scale(1.18) rotate(-6deg)}
+.nav-btn.on{background:linear-gradient(135deg,var(--rose-pale),var(--lav));color:var(--rose-strong);border-color:var(--line);box-shadow:var(--shadow-sm)}
+[data-theme="night"] .nav-btn.on{color:#F6CFDD}
+.bnav-btn{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.68rem;font-weight:700;color:var(--ink-faint);
+  padding:.45rem .2rem;border-radius:14px;transition:all .25s;flex:1;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.bnav-btn svg{width:1.35rem;height:1.35rem;transition:transform .3s cubic-bezier(.34,1.8,.64,1)}
+.bnav-btn.on{color:var(--rose-strong)}
+.bnav-btn.on svg{transform:translateY(-2px) scale(1.12)}
+.bnav-btn:active svg{transform:scale(.9)}
+.bnav-center{width:3.6rem;height:3.6rem;margin-top:-1.7rem;border-radius:50%;background:var(--grad-rose);color:#fff!important;
+  display:grid;place-items:center;box-shadow:0 12px 26px rgba(197,116,140,.5),0 0 0 6px var(--card);flex:none}
+.bnav-center svg{width:1.6rem;height:1.6rem}
+/* ---------- Welcome ---------- */
+#welcome{position:fixed;inset:0;z-index:60;overflow-x:hidden;overflow-y:auto;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(800px 480px at 80% 0%,#FBE3EC 0%,transparent 60%),radial-gradient(700px 500px at 10% 90%,#EFE9FA 0%,transparent 55%),linear-gradient(170deg,#FFF3F6,#FFF9F4 70%,#FDEEF2);
+  transition:opacity .8s ease,transform .8s cubic-bezier(.22,1,.36,1),visibility .8s}
+[data-theme="night"] #welcome{background:radial-gradient(800px 480px at 80% 0%,#3A2A5E 0%,transparent 60%),linear-gradient(170deg,#271D45,#211832)}
+#welcome.w-exit{opacity:0;visibility:hidden;transform:scale(1.06);pointer-events:none}
+.w-deco{position:absolute;pointer-events:none;opacity:.85}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-11px) rotate(1.5deg)}}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.7) rotate(0deg)}50%{opacity:1;transform:scale(1.15) rotate(20deg)}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}25%{transform:scale(1.14)}45%{transform:scale(.96)}}
+@keyframes driftUp{0%{transform:translateY(0) rotate(0deg);opacity:0}12%{opacity:.9}100%{transform:translateY(-46vh) rotate(40deg);opacity:0}}
+.bear-float{animation:floaty 4.5s ease-in-out infinite;filter:drop-shadow(0 18px 22px rgba(197,139,145,.3))}
+.enter-btn{position:relative;background:var(--grad-rose);color:#fff;font-weight:900;font-size:1.12rem;border-radius:999px;
+  padding:1.05rem 2.4rem;box-shadow:0 18px 38px rgba(197,116,140,.45),inset 0 2px 0 rgba(255,255,255,.5),0 0 0 5px rgba(243,201,105,.35),0 0 0 6.5px rgba(217,164,65,.55);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);cursor:pointer;overflow:hidden}
+.enter-btn:hover{transform:translateY(-3px) scale(1.02)}
+.enter-btn:active{transform:scale(.96)}
+.enter-btn::after{content:'';position:absolute;top:0;bottom:0;width:44%;left:-70%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{0%,55%{left:-70%}90%,100%{left:130%}}
+/* ---------- Envelope ---------- */
+.envelope{position:relative;width:min(330px,84vw);aspect-ratio:1.52;margin-inline:auto;perspective:900px;cursor:pointer;filter:drop-shadow(0 18px 26px rgba(197,139,145,.35))}
+.env-back{position:absolute;inset:0;border-radius:16px;background:linear-gradient(150deg,#F9E3EB,#F3CFDd);border:1px solid rgba(217,164,65,.4)}
+.env-letter{position:absolute;left:4.5%;top:4%;width:91%;height:90%;background:#FFFCF9;border-radius:11px;z-index:2;
+  box-shadow:0 6px 18px rgba(150,90,105,.22);border:1px solid #F4E3D7;transition:transform .8s cubic-bezier(.22,1,.36,1) .38s;overflow:hidden}
+.env-letter-inner{padding:.9rem 1rem;text-align:center;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:.3rem;color:#7A5A64}
+.env-pocket{position:absolute;inset:0;z-index:3;border-radius:16px;clip-path:polygon(0 36%,50% 66%,100% 36%,100% 100%,0 100%);
+  background:linear-gradient(160deg,#F6D3DF,#EFB9C9 60%,#E8A9BE)}
+.env-flap{position:absolute;top:0;left:0;width:100%;height:56%;z-index:4;clip-path:polygon(0 0,100% 0,50% 100%);
+  background:linear-gradient(180deg,#EEB7C8,#E29DB4);transform-origin:top center;transition:transform .6s cubic-bezier(.5,0,.3,1),z-index 0s .3s;border-radius:16px 16px 0 0}
+.env-seal{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);z-index:5;width:48px;height:48px;border-radius:50%;
+  background:var(--grad-gold);display:grid;place-items:center;box-shadow:0 6px 16px rgba(180,130,40,.45),inset 0 2px 3px rgba(255,255,255,.65);transition:all .35s;color:#fff}
+.env-seal svg{width:24px;height:24px;animation:heartbeat 2.4s ease-in-out infinite}
+.envelope.open .env-flap{transform:rotateX(180deg);z-index:1}
+.envelope.open .env-letter{transform:translateY(-50%)}
+.envelope.open .env-seal{transform:translate(-50%,-50%) scale(0);opacity:0}
+/* ---------- Stats / progress ---------- */
+.stat-card{padding:1.05rem 1.1rem;display:flex;flex-direction:column;gap:.25rem;position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;inset-inline-end:-18px;top:-18px;width:74px;height:74px;border-radius:50%;background:var(--rose-pale);opacity:.5}
+.stat-ic{width:2.5rem;height:2.5rem;border-radius:15px;display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm);position:relative;z-index:1}
+.stat-ic svg{width:1.3rem;height:1.3rem}
+.stat-num{font-size:1.55rem;font-weight:900;line-height:1.1;position:relative;z-index:1}
+.progress-track{height:16px;border-radius:999px;background:var(--rose-pale);overflow:hidden;position:relative;box-shadow:inset 0 2px 5px rgba(160,90,110,.18)}
+.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--rose-soft),var(--rose) 55%,var(--rose-strong));position:relative;transition:width 1s cubic-bezier(.22,1,.36,1)}
+.progress-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);background-size:200% 100%;animation:shimmer 2.4s linear infinite}
+@keyframes shimmer{from{background-position:180% 0}to{background-position:-80% 0}}
+@keyframes crownPop{0%{transform:scale(0) rotate(-30deg)}60%{transform:scale(1.35) rotate(8deg)}100%{transform:scale(1)}}
+.crown-pop{animation:crownPop .7s cubic-bezier(.34,1.56,.64,1) both;color:var(--gold);filter:drop-shadow(0 4px 8px rgba(217,164,65,.55))}
+/* ---------- Schedule timeline ---------- */
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;inset-inline-start:21px;top:10px;bottom:10px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,var(--rose-soft),var(--lav-deep),var(--rose-soft));opacity:.55}
+.tl-item{position:relative;padding-inline-start:58px;margin-bottom:.85rem}
+.tl-dot{position:absolute;inset-inline-start:11px;top:20px;width:23px;height:23px;border-radius:50%;background:var(--card);border:3px solid var(--rose-soft);z-index:2;display:grid;place-items:center;transition:all .3s}
+.tl-dot svg{width:12px;height:12px;color:#fff;opacity:0;transform:scale(.4);transition:all .3s cubic-bezier(.34,1.8,.64,1)}
+.tl-item.done .tl-dot{background:var(--grad-rose);border-color:transparent}
+.tl-item.done .tl-dot svg{opacity:1;transform:scale(1)}
+.tl-item.now .tl-dot{border-color:var(--gold);box-shadow:0 0 0 5px rgba(243,201,105,.3);animation:nowPulse 1.8s ease-in-out infinite}
+@keyframes nowPulse{0%,100%{box-shadow:0 0 0 4px rgba(243,201,105,.35)}50%{box-shadow:0 0 0 9px rgba(243,201,105,.12)}}
+.task-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1rem 1.1rem;box-shadow:var(--shadow-sm);
+  border-inline-start:5px solid var(--rose);transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.task-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tl-item.now .task-card{border-color:rgba(217,164,65,.65);box-shadow:0 14px 34px rgba(217,164,65,.25)}
+.tl-item.done .task-card{opacity:.72}
+.tl-item.done .task-name{text-decoration:line-through;text-decoration-color:var(--rose);text-decoration-thickness:2px}
+.status-pill{font-size:.7rem;font-weight:800;padding:.18rem .65rem;border-radius:999px;white-space:nowrap}
+.check-btn{width:2.5rem;height:2.5rem;border-radius:50%;border:2px solid var(--rose-soft);display:grid;place-items:center;color:transparent;background:var(--card);cursor:pointer;transition:all .25s;flex:none}
+.check-btn svg{width:1.2rem;height:1.2rem}
+.check-btn:hover{border-color:var(--rose);transform:scale(1.08)}
+.check-btn.on{background:var(--grad-rose);border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(197,116,140,.4)}
+.task-details{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1)}
+.task-details.open{grid-template-rows:1fr}
+.task-details>div{overflow:hidden}
+/* ---------- Timer ---------- */
+.ring-wrap{position:relative;width:min(300px,76vw);aspect-ratio:1;margin-inline:auto}
+.ring-wrap.big{width:min(360px,82vw)}
+.ring-svg{width:100%;height:100%;transform:rotate(0deg);filter:drop-shadow(0 16px 26px rgba(197,139,145,.22))}
+.ring-bg{fill:none;stroke:var(--rose-pale);stroke-width:11}
+.ring-fg{fill:none;stroke:url(#ringGrad);stroke-width:11;stroke-linecap:round}
+.ring-glow .ring-fg{filter:drop-shadow(0 0 7px rgba(217,154,174,.85))}
+.ring-inner-circle{fill:var(--card)}
+.timer-time{font-family:'Poppins',sans-serif;font-weight:600;font-size:clamp(2.5rem,9vw,3.4rem);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.preset-btn.on{background:var(--grad-rose);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(197,116,140,.35)}
+.mode-seg{display:inline-flex;background:var(--rose-pale);border-radius:999px;padding:4px;gap:2px}
+.mode-seg button{padding:.45rem 1.2rem;border-radius:999px;font-weight:800;font-size:.88rem;color:var(--ink-soft);transition:all .25s;cursor:pointer}
+.mode-seg button.on{background:var(--card);color:var(--rose-strong);box-shadow:var(--shadow-sm)}
+.pomo-dot{width:11px;height:11px;border-radius:50%;background:var(--rose-pale);border:2px solid var(--rose-soft);transition:all .3s}
+.pomo-dot.on{background:var(--grad-rose);border-color:transparent;transform:scale(1.15)}
+@keyframes startPulse{0%,100%{box-shadow:0 10px 24px rgba(197,116,140,.38),0 0 0 0 rgba(217,154,174,.5)}50%{box-shadow:0 10px 24px rgba(197,116,140,.38),0 0 0 12px rgba(217,154,174,0)}}
+.pulsing{animation:startPulse 1.6s ease-in-out infinite}
+/* ---------- Poetry ---------- */
+.poem-frame{position:relative;border:1.5px solid rgba(197,139,145,.55);border-radius:20px;background:
+  radial-gradient(420px 200px at 50% 0%,rgba(247,221,229,.65),transparent 70%),var(--card);
+  outline:1px solid rgba(217,164,65,.4);outline-offset:-9px;padding:2.2rem 1.4rem 1.6rem;text-align:center;overflow:hidden}
+.poem-text{font-family:'Amiri',serif;font-size:clamp(1.35rem,4.6vw,1.85rem);line-height:2.15;font-weight:700;color:#7A4E5E;text-shadow:0 1px 0 #fff8}
+[data-theme="night"] .poem-text{color:#F6CFDD;text-shadow:none}
+@keyframes poemIn{from{opacity:0;transform:translateY(14px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+.poem-anim{animation:poemIn .85s cubic-bezier(.22,1,.36,1) both}
+.fav-heart.on{color:#E5587A!important}
+.fav-heart.on svg{fill:#E5587A}
+/* ---------- Tasks / notes ---------- */
+.todo-item{display:flex;gap:.8rem;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:.85rem 1rem;box-shadow:var(--shadow-sm);transition:all .3s}
+.todo-item:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.todo-item.done{opacity:.65}
+.todo-item.done .todo-title{text-decoration:line-through;text-decoration-color:var(--rose)}
+.prio{font-size:.68rem;font-weight:800;padding:.14rem .6rem;border-radius:999px}
+.note-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1rem 1.1rem;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s;position:relative}
+.note-card:hover{transform:translateY(-2px) rotate(-.2deg);box-shadow:var(--shadow)}
+.note-card::before{content:'';position:absolute;top:0;inset-inline:18px;height:5px;border-radius:0 0 6px 6px;background:var(--nc,var(--rose-soft));opacity:.75}
+/* ---------- Calendar / chart / badges ---------- */
+.cal-cell{aspect-ratio:1;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;
+  border:1.5px solid transparent;cursor:pointer;transition:all .2s;position:relative;color:var(--ink)}
+.cal-cell:hover{transform:scale(1.07);border-color:var(--rose-soft)}
+.cal-cell.today{border-color:var(--gold);box-shadow:0 0 0 2px rgba(243,201,105,.35)}
+.cal-cell.sel{background:var(--grad-rose)!important;color:#fff;box-shadow:0 8px 18px rgba(197,116,140,.4)}
+.cal-cell.other{opacity:.32}
+.cal-cell.future{opacity:.45}
+.chart-bar{border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,var(--rose-soft),var(--rose) 60%,var(--rose-strong));min-height:5px;transition:height .9s cubic-bezier(.22,1,.36,1);box-shadow:0 6px 14px rgba(197,116,140,.3);position:relative}
+.badge-card{text-align:center;padding:1rem .6rem;border-radius:20px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .3s}
+.badge-card:hover{transform:translateY(-3px)}
+.badge-ic{width:3.4rem;height:3.4rem;margin-inline:auto;border-radius:50%;display:grid;place-items:center;color:#fff;background:var(--grad-gold);box-shadow:0 10px 20px rgba(217,164,65,.4)}
+.badge-ic svg{width:1.7rem;height:1.7rem}
+.badge-card.locked{opacity:.55}
+.badge-card.locked .badge-ic{background:var(--line);box-shadow:none;color:var(--ink-faint)}
+/* ---------- Modal / toast / misc ---------- */
+.modal-back{position:fixed;inset:0;z-index:120;background:rgba(91,58,68,.42);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;animation:fadeIn .25s both}
+.modal-card{background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:0 30px 70px rgba(90,40,60,.35);
+  width:100%;max-width:30rem;max-height:92dvh;overflow-y:auto;padding:1.5rem;animation:modalIn .45s cubic-bezier(.22,1.2,.36,1) both}
+@keyframes fadeIn{from{opacity:0}}
+@keyframes modalIn{from{opacity:0;transform:translateY(26px) scale(.95)}to{opacity:1;transform:none}}
+#toastRoot{position:fixed;bottom:6.2rem;left:50%;transform:translateX(-50%);z-index:130;display:flex;flex-direction:column;gap:.5rem;align-items:center;width:max-content;max-width:92vw}
+@media(min-width:1024px){#toastRoot{bottom:1.6rem}}
+.toast{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1.5px solid rgba(217,164,65,.5);color:var(--ink);
+  border-radius:999px;padding:.65rem 1.2rem;font-weight:700;font-size:.9rem;box-shadow:0 16px 36px rgba(120,60,80,.28);animation:toastIn .45s cubic-bezier(.22,1.4,.36,1) both}
+.toast svg{width:1.15rem;height:1.15rem;color:var(--rose-strong)}
+.toast.out{animation:toastOut .35s ease both}
+@keyframes toastIn{from{opacity:0;transform:translateY(18px) scale(.92)}}
+@keyframes toastOut{to{opacity:0;transform:translateY(10px) scale(.94)}}
+.reveal{opacity:0;transform:translateY(20px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.spark-bit{position:fixed;z-index:125;pointer-events:none}
+.petal-bit{position:fixed;z-index:125;pointer-events:none;border-radius:65% 4px 65% 4px}
+.mini-timer{position:fixed;bottom:5.6rem;inset-inline-start:50%;transform:translateX(50%);z-index:75;display:flex;align-items:center;gap:.7rem;
+  background:var(--card);border:1.5px solid rgba(217,164,65,.55);border-radius:999px;padding:.45rem .55rem .45rem 1.1rem;box-shadow:0 16px 36px rgba(120,60,80,.3);
+  cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);max-width:94vw}
+[dir="rtl"] .mini-timer{transform:translateX(50%)}
+.mini-timer.hide{opacity:0;pointer-events:none;transform:translateX(50%) translateY(16px) scale(.9)}
+@media(min-width:1024px){.mini-timer{bottom:1.4rem;inset-inline-start:auto;inset-inline-end:1.4rem;transform:none}.mini-timer.hide{transform:translateY(16px) scale(.9)}}
+.tilt{transform-style:preserve-3d;will-change:transform}
+body.no-bears .bear-el{display:none!important}
+#focusOverlay{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;overflow-y:auto;
+  background:radial-gradient(700px 480px at 50% 0%,rgba(247,221,229,.9),transparent 65%),linear-gradient(175deg,#FFF3F6,#FDECF1 60%,#F3EDFB);
+  opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+[data-theme="night"] #focusOverlay{background:linear-gradient(175deg,#2A1E42,#211832)}
+#focusOverlay.open{opacity:1;visibility:visible}
+.theme-pick{border:2px solid var(--line);border-radius:18px;padding:.9rem;cursor:pointer;transition:all .25s;text-align:center;font-weight:700}
+.theme-pick.on{border-color:var(--gold);box-shadow:0 0 0 3px rgba(243,201,105,.3);transform:scale(1.02)}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 0;border-bottom:1px dashed var(--line)}
+.set-row:last-child{border-bottom:none}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.05ms!important}
+/* طبقة توافق: أدوات !important لضمان تجاوز كلاسات المكونات في كل المتصفحات */
+.\!rounded-full{border-radius:9999px!important}
+.\!rounded-\[26px\]{border-radius:26px!important}
+.\!w-auto{width:auto!important}
+.\!w-\[92px\]{width:92px!important}
+.\!w-8{width:2rem!important}.\!h-8{height:2rem!important}
+.\!w-9{width:2.25rem!important}.\!h-9{height:2.25rem!important}
+.\!w-10{width:2.5rem!important}.\!h-10{height:2.5rem!important}
+.\!py-2{padding-top:.5rem!important;padding-bottom:.5rem!important}
+.\!py-1\.5{padding-top:.375rem!important;padding-bottom:.375rem!important}
+.\!py-7{padding-top:1.75rem!important;padding-bottom:1.75rem!important}
+.\!px-2\.5{padding-left:.625rem!important;padding-right:.625rem!important}
+.\!ps-10{padding-inline-start:2.5rem!important}
+.\!h-\[10px\]{height:10px!important}
+.\!h-\[12px\]{height:12px!important}
+.\!text-\[1\.28rem\]{font-size:1.28rem!important}
+.\!leading-\[2\]{line-height:2!important}
+.\!text-\[\#C45555\]{color:#C45555!important}
+</style>
+</head>
+<body>
+
+<canvas id="petals"></canvas>
+
+<!-- ================= WELCOME ================= -->
+<div id="welcome">
+  <div id="welcomeDeco" class="absolute inset-0"></div>
+  <div id="welcomeMain" class="relative z-10 text-center px-6 py-10 max-w-xl mx-auto flex flex-col items-center">
+    <div class="flex items-center gap-2 text-[var(--gold)] mb-1">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1.6-9.2L15 13l-3-6.5L9 13 4.6 8.8 3 18Zm0 2h18v1.6H3V20Z"/></svg>
+    </div>
+    <div class="font-en font-semibold tracking-[.4em] text-[.72rem] sm:text-xs text-[var(--rose-strong)] ltr">QUEEN STUDY PLANNER</div>
+    <div id="welcomeBear" class="bear-el bear-float my-2 w-[190px] sm:w-[225px]"></div>
+    <h1 id="welcomeGreeting" class="text-[1.9rem] sm:text-5xl font-black leading-snug" style="color:#8A5568">صباح الخير يا ملكة</h1>
+    <p id="welcomeSub" class="mt-2 text-base sm:text-lg font-medium text-[var(--ink-soft)]"></p>
+    <p class="font-display italic mt-3 text-[var(--rose-deep)] text-base sm:text-lg ltr">Study like a Queen, achieve like a Legend.</p>
+    <div class="gold-orn my-5"><span></span><i></i><span></span></div>
+    <button id="enterBtn" class="enter-btn"><span id="enterBtnText">اضغطي حتى تبدئين</span></button>
+    <label class="mt-6 flex items-center gap-2 text-sm font-medium text-[var(--ink-soft)] cursor-pointer">
+      <input type="checkbox" id="welcomeSkipChk" class="w-4 h-4 accent-[#D99AAE]">
+      لا تُظهري شاشة الترحيب في المرات القادمة
+    </label>
+  </div>
+
+  <div id="welcomeLetter" class="relative z-10 hidden flex-col items-center px-4 w-full">
+    <div class="envelope mt-16" id="welcomeEnv">
+      <div class="env-back"></div>
+      <div class="env-letter"><div class="env-letter-inner">
+        <div class="font-poem text-[1.02rem] leading-[1.9] font-bold" id="welcomeVerse"></div>
+        <div class="text-[.7rem] font-bold text-[#B98A97]" id="welcomeVerseBy"></div>
+      </div></div>
+      <div class="env-pocket"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+    </div>
+    <button id="welcomeGoBtn" class="btn btn-gold mt-24 text-base px-8 py-3 opacity-0 pointer-events-none transition-all duration-500">دخول إلى مملكتي الدراسية</button>
+    <button id="welcomeSkipBtn" class="mt-3 text-sm font-bold text-[var(--ink-faint)] underline underline-offset-4">تخطي</button>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" class="app-hidden">
+  <div class="lg:flex max-w-[1500px] mx-auto w-full">
+
+    <!-- Sidebar (desktop) -->
+    <aside class="hidden lg:flex flex-col w-[290px] flex-none sticky top-0 h-screen p-5 gap-2">
+      <div class="text-center pt-2 pb-3">
+        <div class="flex justify-center text-[var(--gold)] mb-1">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1.6-9.2L15 13l-3-6.5L9 13 4.6 8.8 3 18Zm0 2h18v1.6H3V20Z"/></svg>
+        </div>
+        <div class="font-en font-semibold tracking-[.28em] text-[.68rem] text-[var(--rose-strong)] ltr">QUEEN STUDY PLANNER</div>
+        <div class="font-display italic text-[.8rem] text-[var(--ink-soft)] mt-1 ltr">Study like a Queen, achieve like a Legend.</div>
+      </div>
+      <nav class="flex flex-col gap-1.5" id="sideNav"></nav>
+      <div class="mt-auto">
+        <div class="q-card p-4 text-center relative overflow-hidden">
+          <div id="sideBear" class="bear-el w-[92px] mx-auto -mb-1"></div>
+          <div class="flex items-center justify-center gap-4 mt-1">
+            <div><div class="text-[.68rem] font-bold text-[var(--ink-soft)]">نقاط الملكة</div><div class="font-black text-lg leading-none flex items-center gap-1 justify-center"><i data-lucide="gem" class="w-4 h-4 text-[var(--rose-strong)]"></i><span id="sidePoints">0</span></div></div>
+            <div class="w-px h-8 bg-[var(--line)]"></div>
+            <div><div class="text-[.68rem] font-bold text-[var(--ink-soft)]">سلسلة الأيام</div><div class="font-black text-lg leading-none flex items-center gap-1 justify-center"><i data-lucide="flame" class="w-4 h-4 text-[#E88A5A]"></i><span id="sideStreak">0</span></div></div>
+          </div>
+          <div id="sideLevel" class="text-[.75rem] font-bold text-[var(--gold)] mt-2"></div>
+        </div>
+        <p class="text-[.66rem] text-center text-[var(--ink-faint)] mt-3 leading-relaxed">بياناتك محفوظة على جهازك فقط.<br>مسح بيانات المتصفح قد يؤدي لفقدانها.</p>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 pt-5 pb-32 lg:pb-12">
+      <!-- Mobile top bar -->
+      <div class="lg:hidden flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--gold)"><path d="M3 18h18l-1.6-9.2L15 13l-3-6.5L9 13 4.6 8.8 3 18Zm0 2h18v1.6H3V20Z"/></svg>
+          <div>
+            <div class="font-en font-semibold tracking-[.2em] text-[.58rem] text-[var(--rose-strong)] leading-none ltr">QUEEN STUDY</div>
+            <div class="font-black text-[.95rem] leading-tight">مخطّط الملكة</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="q-card !rounded-full px-3 py-1.5 flex items-center gap-1.5 font-black text-sm"><i data-lucide="gem" class="w-4 h-4 text-[var(--rose-strong)]"></i><span id="topPoints">0</span></div>
+          <button class="btn btn-ghost btn-icon btn-sm" data-nav="settings" aria-label="الإعدادات"><i data-lucide="settings"></i></button>
+        </div>
+      </div>
+
+      <!-- HOME -->
+      <section id="view-home" class="view">
+        <div id="homeHero"></div>
+        <div id="homeStats" class="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 mt-4"></div>
+        <div id="homeProgress" class="mt-4"></div>
+        <div class="grid lg:grid-cols-5 gap-4 mt-4 items-start">
+          <div class="lg:col-span-3 flex flex-col gap-4 min-w-0">
+            <div id="homeNow"></div>
+            <div id="homeSchedule"></div>
+          </div>
+          <div class="lg:col-span-2 flex flex-col gap-4 min-w-0">
+            <div id="homeActions"></div>
+            <div id="homeBouquet"></div>
+            <div id="homePoetry"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCHEDULE -->
+      <section id="view-schedule" class="view">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <h2 class="sec-title"><span class="ic"><i data-lucide="calendar-heart"></i></span> الجدول الدراسي اليومي</h2>
+          <div class="flex flex-wrap gap-2">
+            <button class="btn btn-soft btn-sm" id="btnRandomSubject"><i data-lucide="shuffle"></i> اختاري لي مادة</button>
+            <button class="btn btn-soft btn-sm" id="btnRescue"><i data-lucide="life-buoy"></i> إنقاذ اليوم</button>
+            <button class="btn btn-primary btn-sm" id="btnAddTask"><i data-lucide="plus"></i> مهمة جديدة</button>
+          </div>
+        </div>
+        <p class="text-sm text-[var(--ink-soft)] mt-2">اضغطي على أي بطاقة لعرض التفاصيل والملاحظات. الأوقات قابلة للتعديل من زر التعديل.</p>
+        <div id="scheduleNowBanner" class="mt-4"></div>
+        <div id="scheduleList" class="timeline mt-5"></div>
+      </section>
+
+      <!-- TIMER -->
+      <section id="view-timer" class="view">
+        <h2 class="sec-title justify-center"><span class="ic"><i data-lucide="timer"></i></span> مؤقّت الدراسة الملكي</h2>
+        <div class="q-card relative overflow-hidden p-5 sm:p-8 text-center max-w-2xl mx-auto mt-4">
+          <div class="absolute -top-10 -start-10 w-40 h-40 rounded-full bg-[var(--rose-pale)] opacity-50"></div>
+          <div class="absolute -bottom-14 -end-10 w-48 h-48 rounded-full bg-[var(--lav)] opacity-50"></div>
+          <div class="relative">
+            <div class="mode-seg" id="modeSeg">
+              <button data-mode="timer" class="on">مؤقّت حر</button>
+              <button data-mode="pomodoro">بومودورو</button>
+            </div>
+            <div class="mt-4 flex items-center justify-center gap-2 flex-wrap">
+              <label class="text-sm font-bold text-[var(--ink-soft)]">المادة:</label>
+              <select id="timerSubject" class="q-input !w-auto !py-2 font-bold"></select>
+            </div>
+            <div id="ringMain" class="mt-3"></div>
+            <p id="timerQuote" class="font-poem text-lg text-[var(--rose-deep)] -mt-1"></p>
+            <div id="pomoInfo" class="mt-3 hidden">
+              <div class="flex items-center justify-center gap-2" id="pomoDots"></div>
+              <div class="text-xs font-bold text-[var(--ink-soft)] mt-1.5" id="pomoLabel"></div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-2 mt-5" id="presetRow">
+              <button class="chip preset-btn" data-preset="15">15 دقيقة</button>
+              <button class="chip preset-btn" data-preset="25">25 دقيقة</button>
+              <button class="chip preset-btn" data-preset="45">45 دقيقة</button>
+              <button class="chip preset-btn" data-preset="60">60 دقيقة</button>
+              <span class="inline-flex items-center gap-1.5">
+                <input id="customMin" type="number" min="1" max="480" placeholder="مخصص" class="q-input !w-[92px] !py-1.5 !rounded-full text-center">
+                <button class="chip" id="btnCustomMin">تعيين</button>
+              </span>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-2.5 mt-6">
+              <button id="btnStartPause" class="btn btn-primary text-base px-9 py-3.5"><i data-lucide="play"></i><span>ابدئي</span></button>
+              <button id="btnResetTimer" class="btn btn-ghost" title="إعادة ضبط"><i data-lucide="rotate-ccw"></i> إعادة</button>
+              <button id="btnPlus5" class="btn btn-soft ltr font-en">+5 min</button>
+              <button id="btnMinus5" class="btn btn-soft ltr font-en">−5 min</button>
+              <button id="btnSound" class="btn btn-ghost btn-icon" title="الصوت"><i data-lucide="volume-2"></i></button>
+              <button id="btnFocusMode" class="btn btn-gold"><i data-lucide="expand"></i> وضع التركيز</button>
+            </div>
+            <div id="timerBear" class="bear-el hidden md:block absolute bottom-0 -end-2 w-[112px] pointer-events-none"></div>
+          </div>
+        </div>
+        <div class="max-w-2xl mx-auto mt-4 grid sm:grid-cols-2 gap-4">
+          <div class="q-card p-5" id="timerTodayStats"></div>
+          <button class="q-card p-5 text-start hover:shadow-[var(--shadow)] transition-shadow cursor-pointer" id="btnCalmCorner">
+            <div class="flex items-center gap-2 font-black"><span class="stat-ic !w-9 !h-9" style="background:linear-gradient(135deg,#C3A6D9,#B7A6E3)"><i data-lucide="moon-star" class="w-5 h-5"></i></span> ركن الهدوء</div>
+            <p class="text-sm text-[var(--ink-soft)] mt-2 leading-relaxed">واجهة هادئة بلا زينة متحركة: مؤقّت، مادة، وعبارة واحدة تُبقيكِ على الطريق.</p>
+            <span class="btn btn-soft btn-sm mt-3">افتحي ركن الهدوء <i data-lucide="arrow-left"></i></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TASKS -->
+      <section id="view-tasks" class="view">
+        <h2 class="sec-title"><span class="ic"><i data-lucide="list-checks"></i></span> قائمة المهام اليومية</h2>
+        <form id="taskForm" class="q-card p-4 sm:p-5 mt-4 grid gap-3 md:grid-cols-[1fr_auto_auto_auto_auto] items-end">
+          <div><label class="q-label">المهمة</label><input id="taskTitle" class="q-input" placeholder="مثال: حل تمارين الفصل الثاني..." required maxlength="120"></div>
+          <div><label class="q-label">المادة</label><select id="taskSubject" class="q-input"></select></div>
+          <div><label class="q-label">الأولوية</label><select id="taskPriority" class="q-input"><option value="low">منخفضة</option><option value="med" selected>متوسطة</option><option value="high">عالية</option></select></div>
+          <div><label class="q-label">الموعد (اختياري)</label><input id="taskDue" type="time" class="q-input ltr"></div>
+          <button class="btn btn-primary" type="submit"><i data-lucide="plus"></i> إضافة</button>
+        </form>
+        <div class="flex flex-wrap gap-2 mt-4 items-center">
+          <span class="text-sm font-bold text-[var(--ink-soft)]">تصفية:</span>
+          <select id="fTaskSubject" class="q-input !w-auto !py-1.5 !rounded-full text-sm"></select>
+          <select id="fTaskPriority" class="q-input !w-auto !py-1.5 !rounded-full text-sm"><option value="">كل الأولويات</option><option value="high">عالية</option><option value="med">متوسطة</option><option value="low">منخفضة</option></select>
+          <select id="fTaskStatus" class="q-input !w-auto !py-1.5 !rounded-full text-sm"><option value="">كل الحالات</option><option value="open">غير منجزة</option><option value="done">منجزة</option></select>
+          <span id="taskCount" class="ms-auto text-sm font-bold text-[var(--ink-soft)]"></span>
+        </div>
+        <div id="taskList" class="flex flex-col gap-2.5 mt-4"></div>
+      </section>
+
+      <!-- POETRY + LOVE NOTES -->
+      <section id="view-poetry" class="view">
+        <div class="q-card-gold p-5 sm:p-7 relative overflow-hidden">
+          <div class="text-center relative">
+            <div id="poetryRose" class="w-16 mx-auto"></div>
+            <h2 class="font-poem text-3xl sm:text-4xl font-bold mt-1" style="color:#8A5568">من قلبِ قيسٍ إلى ليلى</h2>
+            <p class="text-sm text-[var(--ink-soft)] mt-1">ركنٌ شاعريٌّ لأبيات الغزل والشوق والحنين من التراث العربي</p>
+            <div class="gold-orn my-4"><span></span><i></i><span></span></div>
+            <div id="poemCats" class="flex flex-wrap justify-center gap-2"></div>
+          </div>
+          <div id="poemCard" class="mt-5"></div>
+        </div>
+        <div id="poemFavs" class="mt-4"></div>
+
+        <div class="q-card mt-5 p-5 sm:p-7 text-center relative overflow-hidden" id="loveNotesSection">
+          <div class="absolute -top-8 -end-8 w-32 h-32 rounded-full bg-[var(--rose-pale)] opacity-60"></div>
+          <div class="relative">
+            <h3 class="font-en font-semibold tracking-[.25em] text-[.7rem] text-[var(--rose-strong)] ltr">MY LOVE NOTES</h3>
+            <h2 class="text-2xl font-black mt-1">رسائل إلك يا ملكة</h2>
+            <p class="text-sm text-[var(--ink-soft)] mt-1">اضغطي الظرف حتى ينفتح وتوصلك رسالة لطيفة</p>
+            <div class="pt-24 pb-2">
+              <div class="envelope" id="loveEnv">
+                <div class="env-back"></div>
+                <div class="env-letter"><div class="env-letter-inner">
+                  <div class="font-poem text-[1.05rem] leading-[1.95] font-bold" id="loveLetterText"></div>
+                  <div class="text-[.7rem] font-bold text-[#B98A97]" id="loveLetterBy"></div>
+                </div></div>
+                <div class="env-pocket"></div>
+                <div class="env-flap"></div>
+                <div class="env-seal"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+              </div>
+            </div>
+            <div id="loveNoteRead" class="hidden max-w-md mx-auto mt-2 q-soft rounded-2xl px-4 py-3 font-poem text-lg leading-relaxed" style="color:#8A5568"></div>
+            <div class="flex flex-wrap justify-center gap-2 mt-4">
+              <button class="btn btn-primary btn-sm" id="btnNewLoveNote"><i data-lucide="mail-open"></i> رسالة ثانية</button>
+              <button class="btn btn-soft btn-sm" id="btnFavLoveNote"><i data-lucide="heart"></i> حفظ بالمفضلة</button>
+            </div>
+            <div id="favNotesList" class="mt-5 text-start"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NOTES -->
+      <section id="view-notes" class="view">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <h2 class="sec-title"><span class="ic"><i data-lucide="notebook-pen"></i></span> الملاحظات الدراسية</h2>
+          <button class="btn btn-primary btn-sm" id="btnNewNote"><i data-lucide="plus"></i> ملاحظة جديدة</button>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-4 items-center">
+          <div class="relative flex-1 min-w-[200px]">
+            <i data-lucide="search" class="w-4.5 h-4.5 absolute top-1/2 -translate-y-1/2 start-3.5 text-[var(--ink-faint)] pointer-events-none"></i>
+            <input id="noteSearch" class="q-input !ps-10" placeholder="ابحثي في ملاحظاتك...">
+          </div>
+        </div>
+        <div id="noteChips" class="flex flex-wrap gap-2 mt-3"></div>
+        <div id="noteEditor" class="mt-4"></div>
+        <div id="notesList" class="grid md:grid-cols-2 gap-4 mt-4"></div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="view-profile" class="view">
+        <h2 class="sec-title"><span class="ic"><i data-lucide="crown"></i></span> إنجازاتي الملكية</h2>
+        <div id="profileTop" class="mt-4"></div>
+        <div id="badgesWrap" class="mt-4"></div>
+        <div class="grid lg:grid-cols-2 gap-4 mt-4 items-start">
+          <div id="chartWrap"></div>
+          <div id="bouquetWrap"></div>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-4 mt-4 items-start">
+          <div id="calendarWrap" class="lg:col-span-3"></div>
+          <div id="dayDetail" class="lg:col-span-2"></div>
+        </div>
+        <div id="diaryWrap" class="mt-4"></div>
+        <div class="grid grid-cols-3 gap-3 mt-4 lg:hidden">
+          <button class="btn btn-soft" data-nav="poetry"><i data-lucide="flower-2"></i> الشعر</button>
+          <button class="btn btn-soft" data-nav="notes"><i data-lucide="notebook-pen"></i> ملاحظاتي</button>
+          <button class="btn btn-soft" data-nav="settings"><i data-lucide="settings"></i> الإعدادات</button>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="view-settings" class="view">
+        <h2 class="sec-title"><span class="ic"><i data-lucide="settings"></i></span> الإعدادات والتخصيص</h2>
+        <div class="grid lg:grid-cols-2 gap-4 mt-4 items-start">
+          <div class="q-card p-5">
+            <h3 class="font-black flex items-center gap-2"><i data-lucide="palette" class="w-5 h-5 text-[var(--rose-strong)]"></i> المظهر والأجواء</h3>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+              <div class="theme-pick" data-theme-pick="pink">
+                <div class="h-14 rounded-xl mb-2" style="background:linear-gradient(135deg,#FFF3F6,#F7DDE5)"></div>
+                الوضع الوردي <span class="block text-[.7rem] font-medium text-[var(--ink-soft)]">نهار وردي فاتح</span>
+              </div>
+              <div class="theme-pick" data-theme-pick="night">
+                <div class="h-14 rounded-xl mb-2" style="background:linear-gradient(135deg,#2E2349,#4A3577)"></div>
+                البنفسجي الليلي <span class="block text-[.7rem] font-medium text-[var(--ink-soft)]">للسهر والمذاكرة الليلية</span>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="set-row"><div><div class="font-bold">شاشة الترحيب</div><div class="text-xs text-[var(--ink-soft)]">إظهارها عند كل زيارة</div></div><label class="switch"><input type="checkbox" id="setWelcome"><i></i></label></div>
+              <div class="set-row"><div><div class="font-bold">المؤثرات المتحركة</div><div class="text-xs text-[var(--ink-soft)]">حركات الواجهة والانتقالات</div></div><label class="switch"><input type="checkbox" id="setAnim"><i></i></label></div>
+              <div class="set-row"><div><div class="font-bold">بتلات الورد المتساقطة</div><div class="text-xs text-[var(--ink-soft)]">زينة خلفية هادئة</div></div><label class="switch"><input type="checkbox" id="setPetals"><i></i></label></div>
+              <div class="set-row"><div><div class="font-bold">الدباديب والزخارف</div><div class="text-xs text-[var(--ink-soft)]">إظهار رفقاء الدراسة</div></div><label class="switch"><input type="checkbox" id="setBears"><i></i></label></div>
+              <div class="set-row"><div><div class="font-bold">ركن الشعر</div><div class="text-xs text-[var(--ink-soft)]">إظهار قسم قيس وليلى</div></div><label class="switch"><input type="checkbox" id="setPoetry"><i></i></label></div>
+              <div class="set-row"><div><div class="font-bold">الأصوات</div><div class="text-xs text-[var(--ink-soft)]">رنين انتهاء الجلسة</div></div><label class="switch"><input type="checkbox" id="setSound"><i></i></label></div>
+              <div class="set-row"><div><div class="font-bold">الإشعارات اللطيفة</div><div class="text-xs text-[var(--ink-soft)]">رسائل داخل الموقع عند الإنجاز</div></div><label class="switch"><input type="checkbox" id="setNotify"><i></i></label></div>
+            </div>
+            <button class="btn btn-soft btn-sm mt-3" id="btnShowWelcome"><i data-lucide="sparkles"></i> إعادة عرض شاشة الترحيب الآن</button>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="q-card p-5">
+              <h3 class="font-black flex items-center gap-2"><i data-lucide="target" class="w-5 h-5 text-[var(--rose-strong)]"></i> أهداف الدراسة</h3>
+              <div class="grid grid-cols-2 gap-3 mt-4">
+                <div><label class="q-label">الهدف اليومي (دقيقة دراسة)</label><input id="setGoal" type="number" min="10" max="1200" step="10" class="q-input ltr text-center"></div>
+                <div><label class="q-label">مدة الجلسة الافتراضية (دقيقة)</label><input id="setDefaultSession" type="number" min="5" max="480" step="5" class="q-input ltr text-center"></div>
+                <div><label class="q-label">بومودورو: دراسة (دقيقة)</label><input id="setPomoStudy" type="number" min="5" max="180" class="q-input ltr text-center"></div>
+                <div><label class="q-label">بومودورو: استراحة (دقيقة)</label><input id="setPomoBreak" type="number" min="1" max="60" class="q-input ltr text-center"></div>
+                <div><label class="q-label">استراحة طويلة (دقيقة)</label><input id="setPomoLong" type="number" min="5" max="120" class="q-input ltr text-center"></div>
+                <div class="flex items-end"><button class="btn btn-ghost w-full" data-nav="schedule"><i data-lucide="calendar-heart"></i> تعديل الجدول الدراسي</button></div>
+              </div>
+              <p class="text-xs text-[var(--ink-soft)] mt-3 leading-relaxed">الاستراحة الطويلة تأتي تلقائياً بعد كل 4 جلسات بومودورو. تُحفظ التغييرات فوراً على جهازك.</p>
+            </div>
+
+            <div class="q-card p-5">
+              <h3 class="font-black flex items-center gap-2"><i data-lucide="shield-check" class="w-5 h-5 text-[var(--rose-strong)]"></i> بياناتي والنسخ الاحتياطي</h3>
+              <p class="text-sm text-[var(--ink-soft)] mt-2 leading-relaxed">كل بياناتك (الجدول، المهام، الملاحظات، الإنجازات) محفوظة محلياً في متصفح هذا الجهاز فقط، دون أي خادم أو حساب. مسح بيانات المتصفح قد يؤدي إلى فقدانها — لذا يُنصح بتصدير نسخة احتياطية بين حين وآخر.</p>
+              <div class="flex flex-wrap gap-2 mt-4">
+                <button class="btn btn-gold btn-sm" id="btnExport"><i data-lucide="download"></i> تصدير نسخة JSON</button>
+                <button class="btn btn-soft btn-sm" id="btnImport"><i data-lucide="upload"></i> استيراد نسخة</button>
+                <button class="btn btn-sm text-white" id="btnResetAll" style="background:linear-gradient(135deg,#E08A8A,#D96A6A)"><i data-lucide="trash-2"></i> إعادة ضبط كل البيانات</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Bottom nav (mobile) -->
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 z-[65] px-3" style="padding-bottom:env(safe-area-inset-bottom)">
+    <div class="q-card !rounded-[26px] mb-3 px-3 py-1.5 flex items-end gap-1" id="bottomNav">
+      <button class="bnav-btn" data-nav="home"><i data-lucide="home"></i>الرئيسية</button>
+      <button class="bnav-btn" data-nav="schedule"><i data-lucide="calendar-heart"></i>الجدول</button>
+      <button class="bnav-btn" data-nav="timer"><span class="bnav-center"><i data-lucide="timer"></i></span>المؤقّت</button>
+      <button class="bnav-btn" data-nav="tasks"><i data-lucide="list-checks"></i>المهام</button>
+      <button class="bnav-btn" data-nav="profile"><i data-lucide="crown"></i>ملفي</button>
+    </div>
+  </nav>
+
+  <!-- Mini timer -->
+  <div id="miniTimer" class="mini-timer hide">
+    <span class="relative flex w-3 h-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--rose)] opacity-60"></span><span class="relative inline-flex rounded-full w-3 h-3 bg-[var(--rose-strong)]"></span></span>
+    <span class="font-bold text-sm truncate max-w-[110px]" id="miniSubject">جلسة دراسة</span>
+    <span class="font-en font-semibold ltr text-[var(--rose-strong)]" id="miniTime">25:00</span>
+    <button class="btn btn-primary btn-icon btn-sm" id="miniToggle" aria-label="إيقاف/تشغيل"><i data-lucide="pause"></i></button>
+  </div>
+</div>
+
+<!-- ================= FOCUS MODE ================= -->
+<div id="focusOverlay">
+  <div class="text-center px-5 py-8 w-full max-w-xl mx-auto flex flex-col items-center">
+    <div class="font-en tracking-[.35em] text-[.65rem] font-semibold text-[var(--rose-strong)] ltr">FOCUS MODE</div>
+    <div id="ringFocus" class="mt-4"></div>
+    <p id="focusQuote" class="font-poem text-xl mt-1" style="color:#8A5568"></p>
+    <div id="focusBear" class="bear-el w-[104px] mt-2"></div>
+    <div class="flex items-center gap-3 mt-4">
+      <button id="focusToggle" class="btn btn-primary px-8 py-3"><i data-lucide="pause"></i><span>إيقاف مؤقت</span></button>
+      <button id="focusExit" class="btn btn-ghost px-6 py-3"><i data-lucide="x"></i> إنهاء التركيز</button>
+    </div>
+    <p class="text-xs text-[var(--ink-soft)] mt-4">المؤقّت يستمر حتى لو خرجتِ من وضع التركيز أو تنقّلتِ داخل الموقع.</p>
+  </div>
+</div>
+
+<svg width="0" height="0" class="absolute"><defs>
+  <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#E8A2B8"/><stop offset="55%" stop-color="#D99AAE"/><stop offset="100%" stop-color="#C4748C"/>
+  </linearGradient>
+</defs></svg>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+<input type="file" id="importFile" accept="application/json,.json" class="hidden">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script>
+'use strict';
+/* ============================================================
+   QUEEN STUDY PLANNER — تطبيق دراسة متكامل في ملف واحد
+   ============================================================ */
+const LS_KEY='queenStudyPlanner.v1';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const REDUCED=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const uid=()=> 'id'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function todayKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function keyShift(key,days){const[y,m,d]=key.split('-').map(Number);const dt=new Date(y,m-1,d+days);return todayKey(dt)}
+function fmtClock(t){if(!t)return'';let[h,m]=t.split(':').map(Number);const ap=h>=12?'م':'ص';h=h%12||12;return h+':'+String(m).padStart(2,'0')+' '+ap}
+function toMin(t){const[h,m]=t.split(':').map(Number);return h*60+m}
+function fromMin(v){v=((v%1440)+1440)%1440;return String(Math.floor(v/60)).padStart(2,'0')+':'+String(v%60).padStart(2,'0')}
+function fmtMinutes(m){m=Math.round(m);if(m<60)return m+' دقيقة';const h=Math.floor(m/60),r=m%60;return h+(h===1?' ساعة':' ساعات')+(r?' و'+r+' دقيقة':'')}
+function fmtSeconds(s){s=Math.round(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60);if(h)return h+' س '+(m?m+' د':'');if(m)return m+' دقيقة';return s+' ثانية'}
+function fmtCountdown(ms){ms=Math.max(0,ms);const t=Math.ceil(ms/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;
+  const p=n=>String(n).padStart(2,'0');return h>0? h+':'+p(m)+':'+p(s) : p(m)+':'+p(s)}
+function icon(name,cls=''){return `<i data-lucide="${name}" class="${cls}"></i>`}
+function refreshIcons(){try{if(window.lucide)lucide.createIcons()}catch(e){}}
+function debounce(fn,ms){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}
+
+/* ---------------- البيانات الثابتة ---------------- */
+const SUBJECTS=['الإسلامية','اللغة العربية','الأحياء','الكيمياء','الرياضيات','الفيزياء','الإنكليزية'];
+const SUBJ_COLORS={'الإسلامية':['#B7A6E3','#EFEAF9'],'اللغة العربية':['#D99AAE','#FBEFF3'],'الأحياء':['#8FC1A9','#EAF5EF'],'الكيمياء':['#93B8D8','#EAF2FA'],'الرياضيات':['#E8B48C','#FBF1E6'],'الفيزياء':['#C3A6D9','#F4EEFB'],'الإنكليزية':['#D9A441','#FBF3DC'],'عام':['#C58B91','#FBEFF3']};
+const DEFAULT_SCHEDULE=[
+ {id:'s1', name:'الإسلامية',       start:'07:00',end:'08:00',type:'study',icon:'moon-star',      color:'#B7A6E3',note:''},
+ {id:'s2', name:'اللغة العربية',   start:'08:00',end:'09:30',type:'study',icon:'feather',        color:'#D99AAE',note:''},
+ {id:'s3', name:'استراحة',         start:'09:30',end:'09:50',type:'break',icon:'coffee',         color:'#C9B4A8',note:''},
+ {id:'s4', name:'الأحياء',         start:'09:50',end:'11:20',type:'study',icon:'leaf',           color:'#8FC1A9',note:''},
+ {id:'s5', name:'استراحة',         start:'11:20',end:'11:40',type:'break',icon:'coffee',         color:'#C9B4A8',note:''},
+ {id:'s6', name:'الكيمياء',        start:'11:40',end:'13:10',type:'study',icon:'flask-conical',  color:'#93B8D8',note:''},
+ {id:'s7', name:'صلاة وغداء وراحة',start:'13:10',end:'14:00',type:'rest', icon:'utensils',       color:'#E8B48C',note:''},
+ {id:'s8', name:'قيلولة',          start:'14:00',end:'15:00',type:'rest', icon:'bed',            color:'#B7A6E3',note:''},
+ {id:'s9', name:'الرياضيات',       start:'15:00',end:'16:30',type:'study',icon:'sigma',          color:'#E8B48C',note:''},
+ {id:'s10',name:'استراحة',         start:'16:30',end:'16:50',type:'break',icon:'coffee',         color:'#C9B4A8',note:''},
+ {id:'s11',name:'الفيزياء',        start:'16:50',end:'18:20',type:'study',icon:'atom',           color:'#C3A6D9',note:''},
+ {id:'s12',name:'صلاة وعشاء وراحة',start:'18:20',end:'19:00',type:'rest', icon:'utensils',       color:'#E8B48C',note:''},
+ {id:'s13',name:'الإنكليزية',      start:'19:00',end:'20:30',type:'study',icon:'languages',      color:'#D9A441',note:''},
+ {id:'s14',name:'وقت حر',          start:'20:30',end:'21:00',type:'rest', icon:'sparkles',       color:'#E8A2B4',note:''},
+ {id:'s15',name:'مراجعة مركزة',    start:'21:00',end:'22:00',type:'study',icon:'book-open',      color:'#D99AAE',note:''},
+ {id:'s16',name:'اختبار يومي قصير',start:'22:00',end:'22:30',type:'study',icon:'clipboard-check',color:'#C4748C',note:''},
+ {id:'s17',name:'تهيئة للنوم',     start:'22:30',end:'23:00',type:'rest', icon:'moon-star',      color:'#B7A6E3',note:''},
+];
+const POEMS=[
+ {id:'p1',cat:'الحب',  poet:'يُنسب إلى قيس بن الملوح — مجنون ليلى',text:'أَمُرُّ على الديارِ ديارِ ليلى\nأُقَبِّلُ ذا الجدارَ وذا الجدارا\nوما حبُّ الديارِ شَغَفنَ قلبي\nولكن حبُّ مَن سكنَ الديارا'},
+ {id:'p2',cat:'الحنين',poet:'قيس بن الملوح — مجنون ليلى',text:'تذكّرتُ ليلى والسنينَ الخواليا\nوأيامَ لا نخشى على اللهوِ ناهيا'},
+ {id:'p3',cat:'الشوق', poet:'يُنسب إلى قيس بن الملوح',text:'يقولون ليلى بالعراقِ مريضةٌ\nفيا ليتني كنتُ الطبيبَ المداويا'},
+ {id:'p4',cat:'الفراق',poet:'قيس بن الملوح — مجنون ليلى',text:'ألا يا حماماتِ العراقِ أعِنَّني\nعلى شَجَني وابكينَ مثلَ بكائيا'},
+ {id:'p5',cat:'الحب',  poet:'يُنسب إلى قيس بن الملوح',text:'أحبُّ من الأسماءِ ما وافقَ اسمَها\nأو اشبَهَهُ أو كان منهُ مُدانيا'},
+ {id:'p6',cat:'الجمال',poet:'يُنسب إلى قيس بن الملوح',text:'وما كنتُ ممّن يدخلُ العشقَ قلبَهُ\nولكنَّ مَن يُبصرْ جفونَكِ يعشَقِ'},
+ {id:'p7',cat:'الفراق',poet:'يُنسب إلى قيس بن الملوح',text:'خليليَّ هل بالشامِ عينٌ حزينةٌ\nتبكّي على ليلى فتُسعِدَ عينيا؟'},
+ {id:'p8',cat:'الوفاء',poet:'يُنسب إلى قيس بن الملوح',text:'لو كانَ لي قلبانِ عشتُ بواحدٍ\nوأفردتُ قلباً في هواكِ يُعذَّبُ\nلكنَّ لي قلباً تملَّكَهُ الهوى\nلا العيشُ يحلو لهُ ولا الموتُ يقربُ'},
+ {id:'p9',cat:'الحنين',poet:'جميل بن معمر — جميل بثينة',text:'ألا ليتَ أيامَ الصفا جديدُ\nودهراً تولّى يا بثينَ يعودُ'},
+ {id:'p10',cat:'الفراق',poet:'ابن زيدون — من النونية',text:'أضحى التنائي بديلاً من تدانينا\nونابَ عن طيبِ لقيانا تجافينا'},
+ {id:'p11',cat:'الشوق', poet:'ابن زيدون — من النونية',text:'إنّي ذكرتُكِ بالزهراءِ مشتاقاً\nوالأفقُ طلقٌ ووجهُ الأرضِ قد راقا'},
+ {id:'p12',cat:'الحب',  poet:'ابن الفارض',text:'زدني بفرطِ الحبِّ فيكَ تحيُّراً\nوارحمْ حشًى بلظى هواكَ تسعَّرا'},
+ {id:'p13',cat:'الوفاء',poet:'عنترة بن شداد — من المعلقة',text:'ولقد ذكرتُكِ والرماحُ نواهلٌ\nمنّي وبيضُ الهندِ تقطرُ من دمي'},
+ {id:'p14',cat:'الحب',  poet:'قيس بن ذريح — قيس لبنى',text:'تعلّقَ روحي روحَها قبلَ خلقِنا\nومن بعدِ ما كنّا نِطافاً وفي المهدِ'},
+ {id:'p15',cat:'الوفاء',poet:'يُنسب إلى ليلى العامرية',text:'لم يكنِ المجنونُ في حالةٍ\nإلّا وقد كنتُ كما كانا\nلكنّهُ باحَ بسرِّ الهوى\nوإنّني قد ذُبتُ كتمانا'},
+ {id:'p16',cat:'الجمال',poet:'عمر بن أبي ربيعة',text:'قالتِ الكبرى: أتعرفنَ الفتى؟\nقالتِ الوسطى: نعم، هذا عمرْ'},
+ {id:'p17',cat:'الشوق', poet:'ابن زيدون — من النونية',text:'بنتم وبنّا فما ابتلّت جوانحُنا\nشوقاً إليكم ولا جفّت مآقينا'},
+ {id:'p18',cat:'الحنين',poet:'امرؤ القيس — مطلع المعلقة',text:'قفا نبكِ من ذكرى حبيبٍ ومنزلِ\nبسقطِ اللوى بينَ الدخولِ فحوملِ'},
+];
+const POEM_CATS=['الكل','الحب','الشوق','الحنين','الوفاء','الجمال','الفراق'];
+const LOVE_NOTES=[
+ {t:'كل صفحة تقرئينها تقرّبج من حلمج.',by:''},
+ {t:'مو لازم يكون يومج مثالياً، يكفي أن تتقدمين خطوة.',by:''},
+ {t:'الراحة جزء من الإنجاز، مو عكسه.',by:''},
+ {t:'كل إنجاز صغير يستحق وردة.',by:''},
+ {t:'على قدرِ أهلِ العزمِ تأتي العزائمُ، وتأتي على قدرِ الكرامِ المكارمُ.',by:'المتنبي'},
+ {t:'إذا غامرتَ في شرفٍ مَرومِ، فلا تقنعْ بما دونَ النجومِ.',by:'المتنبي'},
+ {t:'وما نيلُ المطالبِ بالتمنّي، ولكن تُؤخذُ الدنيا غِلابا.',by:'أحمد شوقي'},
+ {t:'تاجج ما ينكسر بيوم صعب؛ يلمع أكثر بعد ما تتجاوزينه.',by:''},
+ {t:'ركّزي على صفحة وحدة هسّة، والمستقبل يهتم بحاله.',by:''},
+ {t:'إنجازج اليوم لو صغير، باجر يصير قصة نجاحج.',by:''},
+ {t:'اشربي ماي، تنفّسي، وكمّلي... الملكات يرتاحن ويكملن.',by:''},
+ {t:'اللي تعبتي عليه اليوم، باجر يصير سهل عليج.',by:''},
+ {t:'مو مهم السرعة، المهم ما توگفين.',by:''},
+ {t:'خلي خطوتج ثابتة، حتى لو كانت صغيرة.',by:''},
+ {t:'ساعة تركيز وحدة اليوم تفتح لج أبواب باجر.',by:''},
+];
+const QUOTES=[
+ 'كل صفحة تقرئينها تقرّبكِ من حلمكِ خطوة.',
+ 'الملكات لا ينتظرن الحظ... يصنعنه بالمثابرة.',
+ 'يومٌ عادي مع خطوة صغيرة، أفضل من يوم مثالي لم يأتِ.',
+ 'ركّزي على المهمة التي أمامكِ فقط، ودعي الباقي لوقته.',
+ 'تعب اليوم هو فخر الغد.',
+ 'على قدرِ أهلِ العزمِ تأتي العزائمُ.',
+ 'الراحة الذكية جزء من خطة النجاح.',
+ 'خطوة ثابتة كل يوم تصنع مسافة عظيمة في النهاية.',
+];
+const LEVELS=['أميرة البدايات','نجمة صاعدة','ملكة التركيز','ملكة الالتزام','حارسة التاج','أسطورة الإنجاز'];
+const BADGE_DEFS=[
+ {id:'first', name:'أول جلسة', en:'First Session', icon:'sprout', desc:'إكمال أول جلسة دراسة', test:s=>s.totals.sessions>=1},
+ {id:'focus', name:'ملكة التركيز', en:'Focus Queen', icon:'target', desc:'إكمال 10 جلسات دراسة', test:s=>s.totals.sessions>=10},
+ {id:'consist',name:'ملكة الاستمرارية', en:'Queen of Consistency', icon:'flame', desc:'سلسلة 5 أيام متتالية', test:s=>s.streak.best>=5},
+ {id:'perfect',name:'يوم مثالي', en:'Perfect Day', icon:'crown', desc:'إكمال كل مواد الجدول في يوم واحد', test:s=>!!s.flags.perfectDay},
+ {id:'early', name:'وردة الصباح', en:'Morning Rose', icon:'sunrise', desc:'جلسة مكتملة قبل 9 صباحاً', test:s=>!!s.flags.earlySession},
+ {id:'scholar',name:'عالمة المملكة', en:'Royal Scholar', icon:'graduation-cap', desc:'دراسة 20 ساعة إجمالاً', test:s=>s.totals.studySeconds>=20*3600},
+ {id:'notes', name:'حارسة المخطوطات', en:'Notes Keeper', icon:'notebook-pen', desc:'كتابة 5 ملاحظات دراسية', test:s=>s.notes.length>=5},
+ {id:'tasks', name:'مُنجزة المهام', en:'Task Duchess', icon:'list-checks', desc:'إكمال 15 مهمة', test:s=>s.totals.tasksDone>=15},
+];
+
+/* ---------------- الحالة والحفظ ---------------- */
+function defaultState(){return{
+ settings:{theme:'pink',welcome:true,sound:true,anim:true,petals:true,bears:true,poetry:true,notify:true,
+   goalMin:300,defaultSession:25,pomoStudy:25,pomoBreak:5,pomoLong:15},
+ schedule:JSON.parse(JSON.stringify(DEFAULT_SCHEDULE)),
+ days:{}, tasks:[], notes:[],
+ points:0, totals:{sessions:0,studySeconds:0,tasksDone:0},
+ streak:{count:0,best:0,last:''}, badges:[], flags:{},
+ favPoems:[], favNotes:[],
+ timer:{mode:'timer',phase:'study',subjectId:'free',subjectName:'جلسة حرة',totalMs:25*60000,remainingMs:25*60000,
+   endAt:null,running:false,sessionId:null,counted:false,creditedMs:0,pomoCount:0,pendingMsg:''},
+ ui:{view:'home',poemCat:'الكل',lastPoem:'',lastNote:-1,calCursor:'',calSelected:''}
+}}
+let state;
+function loadState(){
+ try{const raw=localStorage.getItem(LS_KEY);if(!raw)return defaultState();
+  const p=JSON.parse(raw);const d=defaultState();
+  const out={...d,...p,settings:{...d.settings,...(p.settings||{})},timer:{...d.timer,...(p.timer||{})},
+    totals:{...d.totals,...(p.totals||{})},streak:{...d.streak,...(p.streak||{})},ui:{...d.ui,...(p.ui||{})}};
+  if(!Array.isArray(out.schedule)||!out.schedule.length)out.schedule=d.schedule;
+  if(!out.days||typeof out.days!=='object')out.days={};
+  ['tasks','notes','badges','favPoems','favNotes'].forEach(k=>{if(!Array.isArray(out[k]))out[k]=[]});
+  return out;
+ }catch(e){console.warn('load error',e);return defaultState()}
+}
+state=loadState();
+let saveTimer=null;
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>{try{localStorage.setItem(LS_KEY,JSON.stringify(state))}catch(e){console.warn('save error',e)}},60)}
+function saveNow(){try{localStorage.setItem(LS_KEY,JSON.stringify(state))}catch(e){}}
+function dayRec(key=todayKey()){
+ if(!state.days[key])state.days[key]={doneSchedule:[],awardedSchedule:[],studySeconds:0,sessions:0,tasksDone:0,diary:{summary:'',best:'',improve:''}};
+ const r=state.days[key];if(!r.diary)r.diary={summary:'',best:'',improve:''};return r;
+}
+function touchStreak(){
+ const t=todayKey(),s=state.streak;
+ if(s.last===t)return;
+ s.count=(s.last===keyShift(t,-1))? s.count+1 : 1;
+ s.last=t;s.best=Math.max(s.best,s.count);
+}
+function addPoints(n){if(n>0){state.points+=n;updatePointsUI()}}
+function levelInfo(){const per=120;const lv=Math.min(LEVELS.length,Math.floor(state.points/per)+1);
+ const inLv=state.points-(lv-1)*per;return{lv,name:LEVELS[lv-1],pct:lv>=LEVELS.length?100:Math.round(inLv/per*100),need:lv>=LEVELS.length?0:per-inLv}}
+function checkBadges(announce=true){
+ BADGE_DEFS.forEach(b=>{if(!state.badges.includes(b.id)&&b.test(state)){
+   state.badges.push(b.id);if(announce)toast('شارة جديدة: '+b.name,'award');}});
+}
+
+/* ---------------- رسومات SVG أصلية: الدبدوب والورد ---------------- */
+function roseGroup(x,y,s=1,petal='#E86A8A',core='#C93A5E'){
+ const p=[[0,-8],[7.6,-2.5],[4.7,6.5],[-4.7,6.5],[-7.6,-2.5]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="7" fill="${petal}"/>`).join('');
+ return `<g transform="translate(${x},${y}) scale(${s})">${p}<circle r="6.4" fill="${core}"/><path d="M-3.4.6a3.6 3.6 0 1 1 4.8 2.6 2.2 2.2 0 1 0-2.8-3" fill="none" stroke="#9E2B4B" stroke-width="1.5" stroke-linecap="round"/></g>`;
+}
+function bearSVG(preset='read'){
+ const P={
+  welcome:{crown:1,acc:'rose',eyes:'open',bow:1},
+  read:{acc:'book',eyes:'open',bow:1},
+  clock:{acc:'clock',eyes:'open',bow:1},
+  star:{acc:'star',eyes:'happy',bow:1},
+  queen:{crown:1,acc:'star',eyes:'happy',bow:1},
+  sleep:{acc:'none',eyes:'closed',bow:1,moon:1},
+  plain:{acc:'none',eyes:'open',bow:1},
+ }[preset]||{};
+ const fur='#EDC0A6',furD='#E0AC8E',cream='#F8E9DA',ink2='#40303A',nose='#7C4A4E';
+ let eyes='';
+ if(P.eyes==='happy')eyes=`<path d="M86 101q9-10 18 0M136 101q9-10 18 0" fill="none" stroke="${ink2}" stroke-width="3.2" stroke-linecap="round"/>`;
+ else if(P.eyes==='closed')eyes=`<path d="M86 98q9 7 18 0M136 98q9 7 18 0" fill="none" stroke="${ink2}" stroke-width="3" stroke-linecap="round"/>`;
+ else eyes=`<circle cx="95" cy="98" r="5.6" fill="${ink2}"/><circle cx="145" cy="98" r="5.6" fill="${ink2}"/>
+   <circle cx="96.9" cy="96.1" r="1.9" fill="#fff"/><circle cx="146.9" cy="96.1" r="1.9" fill="#fff"/>
+   <path d="M88.5 93.5 83.5 90M90.5 91.3 87 86.6M151.5 93.5l5-3.5M149.5 91.3 153 86.6" stroke="${ink2}" stroke-width="2" stroke-linecap="round"/>`;
+ let arms='',acc='';
+ const armSide=(x,y,r)=>`<ellipse cx="${x}" cy="${y}" rx="14" ry="25" fill="${furD}" transform="rotate(${r} ${x} ${y})"/>`;
+ if(P.acc==='book'){
+   arms=`<ellipse cx="80" cy="197" rx="12" ry="20" fill="${furD}" transform="rotate(42 80 197)"/><ellipse cx="160" cy="197" rx="12" ry="20" fill="${furD}" transform="rotate(-42 160 197)"/>`;
+   acc=`<g transform="translate(120,202)">
+     <path d="M0-13C-16-21-34-22-47-17v31C-34 9-16 10 0 17c16-7 34-8 47-3v-31C34-22 16-21 0-13Z" fill="#C98CA0"/>
+     <path d="M0-12C-15-19-32-20-44-15.5v28C-32 8.5-15 9.5 0 16c15-6.5 32-7.5 44-3.5v-28C32-20 15-19 0-12Z" fill="#FFFDF7" stroke="#EBD9C8"/>
+     <path d="M0-12v28" stroke="#EBD9C8" stroke-width="2"/>
+     <path d="M-37-7c9-2.6 20-2.4 29 .8M-37-.5c9-2.6 20-2.4 29 .8M8-6.2c9-3.2 20-3.4 29-.8M8 .3c6-2.1 13-2.9 20-2.2" stroke="#EAC7D2" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+     <path d="M25 9.5c-2.4-3.4-7.4-1-6.4 2.3.6 2 3.8 3.8 6.4 5.4 2.6-1.6 5.8-3.4 6.4-5.4 1-3.3-4-5.7-6.4-2.3Z" fill="#E8A2B4"/></g>`;
+ }else if(P.acc==='rose'||P.acc==='star'||P.acc==='clock'){
+   arms=armSide(60,182,28)+`<ellipse cx="183" cy="166" rx="13" ry="22" fill="${furD}" transform="rotate(-48 183 166)"/>`;
+   if(P.acc==='rose')acc=`<g transform="translate(189,150)"><path d="M0 38C3 18-3 6 0-8" fill="none" stroke="#7FB285" stroke-width="3.6" stroke-linecap="round"/><path d="M-1 16q-13-1-16-13 12 0 16 13Z" fill="#8FC1A9"/>${roseGroup(0,-15,1.15)}</g>`;
+   if(P.acc==='star')acc=`<g transform="translate(190,146)"><path d="M0-17l4.7 10.4L16-5 7.6 2.6 10 14 0 8.4-10 14l2.4-11.4L-16-5l11.3-1.6Z" fill="#F6CD6B" stroke="#D9A441" stroke-width="2" stroke-linejoin="round"/>
+     <path d="M-20-16l1.8 4.6L-13.5-9.6l-4.7 1.8L-20-3l-1.8-4.8-4.7-1.8 4.7-1.8Z" fill="#F3C969"/><path d="M18 12l1.4 3.6 3.6 1.4-3.6 1.4L18 22l-1.4-3.6L13 17l3.6-1.4Z" fill="#F3C969"/></g>`;
+   if(P.acc==='clock')acc=`<g transform="translate(188,158)"><circle r="19" fill="#FFFCF9" stroke="#C58B91" stroke-width="4"/>
+     <circle cy="-12.5" r="1.7" fill="#C58B91"/><circle cy="12.5" r="1.7" fill="#C58B91"/><circle cx="-12.5" r="1.7" fill="#C58B91"/><circle cx="12.5" r="1.7" fill="#C58B91"/>
+     <path d="M0 0V-9.5M0 0l6.5 3.5" stroke="#66545A" stroke-width="2.7" stroke-linecap="round"/><circle r="2.3" fill="#D99AAE"/></g>`;
+ }else arms=armSide(60,182,28)+armSide(180,182,-28);
+ const crown=P.crown?`<g transform="translate(118,38) rotate(-5)">
+   <path d="M-27 16-30-6-14 6 0-14 14 6 30-6 27 16Q0 23-27 16Z" fill="#F6CD6B" stroke="#D9A441" stroke-width="2" stroke-linejoin="round"/>
+   <circle cx="-30" cy="-9" r="3.6" fill="#F6CD6B" stroke="#D9A441"/><circle cy="-17" r="4" fill="#F6CD6B" stroke="#D9A441"/><circle cx="30" cy="-9" r="3.6" fill="#F6CD6B" stroke="#D9A441"/>
+   <circle cy="9" r="4" fill="#E87A9B"/><circle cx="-15" cy="11" r="2.6" fill="#B7A6E3"/><circle cx="15" cy="11" r="2.6" fill="#93B8D8"/></g>`:'';
+ const bow=P.bow?`<g transform="translate(183,45) rotate(16)"><ellipse cx="-11" rx="11" ry="7" fill="#E39AB0" stroke="#C97E95" stroke-width="1.4" transform="rotate(-24 -11 0)"/><ellipse cx="11" rx="11" ry="7" fill="#E39AB0" stroke="#C97E95" stroke-width="1.4" transform="rotate(24 11 0)"/><circle r="5" fill="#D9839F" stroke="#C97E95"/></g>`:'';
+ const moon=P.moon?`<g transform="translate(198,52)"><path d="M13-13A16 16 0 1 0 13 13 12.5 12.5 0 1 1 13-13Z" fill="#F3C969"/><text x="16" y="-8" font-family="Poppins" font-size="15" font-weight="700" fill="#B7A6E3">z</text><text x="23" y="-20" font-family="Poppins" font-size="11" font-weight="700" fill="#CDBFEE">z</text></g>`:'';
+ return `<svg viewBox="0 0 240 270" class="w-full h-auto" role="img" aria-label="دبدوب مرافق الدراسة">
+  <ellipse cx="120" cy="254" rx="72" ry="10" fill="#7A4A56" opacity=".08"/>
+  <ellipse cx="72" cy="240" rx="27" ry="15" fill="${furD}" transform="rotate(-16 72 240)"/>
+  <ellipse cx="168" cy="240" rx="27" ry="15" fill="${furD}" transform="rotate(16 168 240)"/>
+  <ellipse cx="72" cy="241" rx="12" ry="6.5" fill="#F2B8C6" transform="rotate(-16 72 241)"/>
+  <ellipse cx="168" cy="241" rx="12" ry="6.5" fill="#F2B8C6" transform="rotate(16 168 241)"/>
+  <ellipse cx="120" cy="198" rx="57" ry="50" fill="${fur}"/>
+  <ellipse cx="120" cy="206" rx="33" ry="31" fill="${cream}"/>
+  ${arms}
+  <circle cx="66" cy="60" r="23" fill="${furD}"/><circle cx="174" cy="60" r="23" fill="${furD}"/>
+  <circle cx="66" cy="60" r="11" fill="#F2B8C6"/><circle cx="174" cy="60" r="11" fill="#F2B8C6"/>
+  <circle cx="120" cy="104" r="63" fill="${fur}"/>
+  <ellipse cx="120" cy="128" rx="27" ry="20" fill="${cream}"/>
+  <ellipse cx="120" cy="120" rx="9" ry="6.5" fill="${nose}"/><ellipse cx="117" cy="118" rx="3" ry="1.8" fill="#fff" opacity=".55"/>
+  <path d="M120 126.5v4M120 130.5q-5 5-10.5 1.5M120 130.5q5 5 10.5 1.5" fill="none" stroke="${nose}" stroke-width="2.4" stroke-linecap="round"/>
+  ${eyes}
+  <ellipse cx="74" cy="116" rx="10" ry="5.5" fill="#F2A9BE" opacity=".8"/><ellipse cx="166" cy="116" rx="10" ry="5.5" fill="#F2A9BE" opacity=".8"/>
+  ${acc}${crown}${bow}${moon}
+ </svg>`;
+}
+function bouquetSVG(n){
+ const pos=[[100,50],[70,62],[130,62],[54,86],[146,86],[82,82],[118,82],[100,70]];
+ let stems='',flowers='',leaves='';
+ for(let i=0;i<8;i++){const[x,y]=pos[i];
+   leaves+=`<ellipse cx="${x+(x<100?-14:14)}" cy="${y+12}" rx="11" ry="5.5" fill="#A9CDB4" transform="rotate(${x<100?-32:32} ${x+(x<100?-14:14)} ${y+12})"/>`;
+   if(i<n){stems+=`<path d="M100 158Q${(100+x)/2} ${(158+y)/2+8} ${x} ${y+8}" fill="none" stroke="#8FBF9D" stroke-width="3"/>`;
+     flowers+=roseGroup(x,y,1.25,i%2?'#EE93AC':'#E86A8A',i%2?'#D64E73':'#C93A5E');}
+ }
+ if(n===0)flowers=`<g transform="translate(100,66)"><path d="M0 92V14" stroke="#8FBF9D" stroke-width="3.4"/><ellipse cx="-12" cy="44" rx="12" ry="6" fill="#A9CDB4" transform="rotate(-30 -12 44)"/><path d="M0 16C-8 6-8-4 0-14 8-4 8 6 0 16Z" fill="#EFB9C9" stroke="#E29DB4" stroke-width="1.6"/></g>`;
+ const spark=n>=8?`<path d="M38 40l2 5.4L45.4 47.4 40 49.4 38 54.8 36 49.4 30.6 47.4 36 45.4Z" fill="#F3C969"/><path d="M162 34l1.7 4.5 4.5 1.7-4.5 1.7L162 46.4l-1.7-4.5-4.5-1.7 4.5-1.7Z" fill="#F3C969"/>`:'';
+ return `<svg viewBox="0 0 200 215" class="w-full h-auto" role="img" aria-label="باقة ورد الإنجاز">
+  ${leaves}${stems}${flowers}${spark}
+  <path d="M100 208 58 106Q100 90 142 106Z" fill="#F9E3EB" stroke="#E8B7C5" stroke-width="1.6"/>
+  <path d="M100 208 76 120M100 208l24-88M100 208V116" stroke="#EFC9D6" stroke-width="1.4"/>
+  <g transform="translate(100,158)"><ellipse cx="-13" rx="13" ry="8" fill="#E39AB0" stroke="#C97E95" transform="rotate(-22 -13 0)"/><ellipse cx="13" rx="13" ry="8" fill="#E39AB0" stroke="#C97E95" transform="rotate(22 13 0)"/><circle r="5.6" fill="#D9839F" stroke="#C97E95"/><path d="M-4 5-9 20M4 5l5 15" stroke="#C97E95" stroke-width="3" stroke-linecap="round"/></g>
+ </svg>`;
+}
+function roseDecoSVG(){return `<svg viewBox="0 0 80 80" class="w-full h-auto"><path d="M40 74C42 58 38 50 40 40" fill="none" stroke="#7FB285" stroke-width="3.4" stroke-linecap="round"/><path d="M39 58q-14-1-18-14 13 0 18 14Z" fill="#8FC1A9"/><path d="M41 50q12-4 13-16-12 3-13 16Z" fill="#A9CDB4"/>${roseGroup(40,30,1.7)}</svg>`}
+
+/* ---------------- الصوت (WebAudio، لا يعمل إلا بعد تفاعل) ---------------- */
+let audioCtx=null;
+function ensureAudio(){if(!audioCtx){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume()}
+function chime(){
+ if(!state.settings.sound||!audioCtx)return;
+ try{const t=audioCtx.currentTime;[[659.25,0],[830.61,.14],[987.77,.28]].forEach(([f,d])=>{
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=f;
+  g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(.16,t+d+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d+.9);
+  o.connect(g).connect(audioCtx.destination);o.start(t+d);o.stop(t+d+1);});}catch(e){}
+}
+function popSound(){if(!state.settings.sound||!audioCtx)return;try{const t=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();
+ o.type='triangle';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(880,t+.09);
+ g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.0001,t+.12);o.connect(g).connect(audioCtx.destination);o.start(t);o.stop(t+.13);}catch(e){}}
+
+/* ---------------- إشعارات ونوافذ ---------------- */
+function toast(msg,ic='sparkles',force=false){
+ if(!state.settings.notify&&!force)return;
+ const el=document.createElement('div');el.className='toast';el.innerHTML=icon(ic)+'<span>'+esc(msg)+'</span>';
+ $('#toastRoot').appendChild(el);refreshIcons();
+ setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),360)},3400);
+}
+function openModal(html,maxW){
+ const root=$('#modalRoot');root.innerHTML=`<div class="modal-back"><div class="modal-card" ${maxW?`style="max-width:${maxW}"`:''}>${html}</div></div>`;
+ refreshIcons();
+ const back=root.firstElementChild;
+ back.addEventListener('click',e=>{if(e.target===back)closeModal()});
+ return root.querySelector('.modal-card');
+}
+function closeModal(){$('#modalRoot').innerHTML=''}
+function confirmModal(title,msg,okText='تأكيد',danger=false){
+ return new Promise(res=>{
+  const c=openModal(`<div class="text-center">
+   <div class="bear-el w-[92px] mx-auto">${bearSVG('plain')}</div>
+   <h3 class="font-black text-lg mt-1">${esc(title)}</h3>
+   <p class="text-sm text-[var(--ink-soft)] mt-1.5 leading-relaxed">${esc(msg)}</p>
+   <div class="flex gap-2 justify-center mt-5">
+     <button class="btn btn-ghost" id="cmNo">إلغاء</button>
+     <button class="btn ${danger?'text-white':'btn-primary'}" id="cmYes" ${danger?'style="background:linear-gradient(135deg,#E08A8A,#D96A6A)"':''}>${esc(okText)}</button>
+   </div></div>`);
+  c.querySelector('#cmYes').onclick=()=>{closeModal();res(true)};
+  c.querySelector('#cmNo').onclick=()=>{closeModal();res(false)};
+ });
+}
+/* انفجار نجوم/بتلات احتفالي عند عنصر */
+function burstAt(el,kind='spark'){
+ if(!el||REDUCED||!state.settings.anim)return;
+ const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+ const cols=['#D99AAE','#F3C969','#E8B7C5','#B7A6E3','#E86A8A'];
+ for(let i=0;i<14;i++){
+  const s=document.createElement('div');
+  if(kind==='petal'){s.className='petal-bit';s.style.cssText=`width:11px;height:14px;background:${cols[i%cols.length]};left:${cx}px;top:${cy}px`}
+  else{s.className='spark-bit';s.innerHTML=`<svg width="15" height="15" viewBox="0 0 24 24" fill="${cols[i%cols.length]}"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg>`;s.style.cssText=`left:${cx}px;top:${cy}px`}
+  document.body.appendChild(s);
+  const a=Math.random()*Math.PI*2,d=46+Math.random()*70;
+  s.animate([{transform:'translate(-50%,-50%) scale(.4) rotate(0deg)',opacity:1},
+    {transform:`translate(${Math.cos(a)*d-7}px,${Math.sin(a)*d-40}px) scale(1.1) rotate(${Math.random()*220-110}deg)`,opacity:0}],
+    {duration:750+Math.random()*450,easing:'cubic-bezier(.22,1,.36,1)'}).onfinish=()=>s.remove();
+ }
+}
+
+/* ---------------- محرك بتلات الخلفية ---------------- */
+const petals={cv:null,ctx:null,items:[],running:false,raf:null,
+ init(){this.cv=$('#petals');if(!this.cv)return;this.ctx=this.cv.getContext('2d');this.resize();
+  addEventListener('resize',debounce(()=>this.resize(),200));
+  const n=clamp(Math.round(innerWidth/55),12,26);
+  const cols=['rgba(232,183,197,','rgba(217,154,174,','rgba(243,201,210,','rgba(201,178,232,'];
+  for(let i=0;i<n;i++)this.items.push(this.spawn(cols,true));
+ },
+ spawn(cols,anyY=false){return{x:Math.random()*innerWidth,y:anyY?Math.random()*innerHeight:-30,
+   s:7+Math.random()*9,vy:.35+Math.random()*.7,ph:Math.random()*6.28,ps:.008+Math.random()*.02,
+   rot:Math.random()*6.28,vr:(Math.random()-.5)*.02,c:cols[Math.floor(Math.random()*cols.length)],a:.35+Math.random()*.4}},
+ resize(){if(!this.cv)return;const d=Math.min(devicePixelRatio||1,1.6);this.cv.width=innerWidth*d;this.cv.height=innerHeight*d;this.ctx.setTransform(d,0,0,d,0,0)},
+ allowed(){return state.settings.petals&&state.settings.anim&&!REDUCED&&!document.hidden&&!$('#focusOverlay').classList.contains('open')},
+ start(){if(this.running||!this.ctx)return;this.running=true;this.cv.style.opacity=1;const step=()=>{
+   if(!this.running)return;
+   if(!this.allowed()){this.ctx.clearRect(0,0,innerWidth,innerHeight);this.raf=requestAnimationFrame(step);return}
+   const ctx=this.ctx;ctx.clearRect(0,0,innerWidth,innerHeight);
+   for(const p of this.items){p.ph+=p.ps;p.y+=p.vy;p.x+=Math.sin(p.ph)*.55;p.rot+=p.vr;
+     if(p.y>innerHeight+34)Object.assign(p,this.spawn(['rgba(232,183,197,','rgba(217,154,174,','rgba(243,201,210,','rgba(201,178,232,']));
+     ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.c+p.a+')';
+     ctx.beginPath();ctx.moveTo(0,-p.s);ctx.bezierCurveTo(p.s*.9,-p.s*.4,p.s*.7,p.s*.7,0,p.s);ctx.bezierCurveTo(-p.s*.7,p.s*.7,-p.s*.9,-p.s*.4,0,-p.s);ctx.fill();ctx.restore();}
+   this.raf=requestAnimationFrame(step)};step()},
+ stop(){this.running=false;if(this.raf)cancelAnimationFrame(this.raf);if(this.ctx)this.ctx.clearRect(0,0,innerWidth,innerHeight)}
+};
+/* ---------------- التحية حسب الوقت ---------------- */
+function greetingInfo(d=new Date()){
+ const h=d.getHours();
+ if(h>=5&&h<12)return{g:'صباح الخير يا ملكة 🌸',btn:'صباح الخير يا ملكة 💗 اضغطي حتى تبدئين',sub:'يوم جديد ينتظر تاجكِ يلمع فيه، هيّا نصنع إنجازاً جميلاً.'};
+ if(h>=12&&h<17)return{g:'طاب نهارج يا ملكة 🌷',btn:'طاب نهارج يا ملكة 💗 اضغطي حتى تبدئين',sub:'منتصف اليوم وقت ممتاز لجلسة تركيز ملكية.'};
+ if(h>=17&&h<21)return{g:'مساء الورد يا ملكة 🌹',btn:'مساء الورد يا ملكة 💗 اضغطي حتى تبدئين',sub:'أجواء المساء هادئة ومثالية لمراجعة أنيقة.'};
+ return{g:'ليلتج وردية يا ملكة 🌙💗',btn:'ليلتج وردية يا ملكة 💗 اضغطي حتى تبدئين',sub:'هدوء الليل صديق الملكات... جلسة خفيفة ثم راحة مستحقة.'};
+}
+function dailyQuote(){const d=new Date();const seed=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);return QUOTES[seed%QUOTES.length]}
+function updatePointsUI(){
+ const li=levelInfo();
+ [$('#sidePoints'),$('#topPoints')].forEach(e=>{if(e)e.textContent=state.points});
+ const ss=$('#sideStreak');if(ss)ss.textContent=state.streak.count;
+ const sl=$('#sideLevel');if(sl)sl.textContent='المستوى '+li.lv+' — '+li.name;
+}
+
+/* ---------------- حسابات الجدول ---------------- */
+function sortedSchedule(){return[...state.schedule].sort((a,b)=>toMin(a.start)-toMin(b.start))}
+function studyItems(){return sortedSchedule().filter(t=>t.type==='study')}
+function schedulePct(key=todayKey()){
+ const items=studyItems();if(!items.length)return 0;
+ const done=dayRec(key).doneSchedule.filter(id=>items.some(t=>t.id===id)).length;
+ return Math.round(done/items.length*100);
+}
+function nowTaskStatus(t){
+ const now=new Date(),cur=now.getHours()*60+now.getMinutes();
+ if(cur>=toMin(t.start)&&cur<toMin(t.end))return'now';
+ if(cur>=toMin(t.end))return'past';
+ return'next';
+}
+function currentAndNext(){
+ const items=sortedSchedule();const now=new Date(),cur=now.getHours()*60+now.getMinutes();
+ let nowT=null,nextT=null;
+ for(const t of items){if(cur>=toMin(t.start)&&cur<toMin(t.end))nowT=t;if(toMin(t.start)>cur&&!nextT)nextT=t}
+ return{nowT,nextT};
+}
+function typeLabel(t){return t==='study'?'دراسة':t==='break'?'استراحة':'راحة'}
+function durOf(t){return Math.max(0,toMin(t.end)-toMin(t.start))}
+
+/* ---------------- الصفحة الرئيسية ---------------- */
+function renderHome(){
+ const gi=greetingInfo(),now=new Date(),rec=dayRec();
+ const dateStr=now.toLocaleDateString('ar-u-nu-latn',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ const pct=schedulePct();
+ const bearVariant=pct>=100?'queen':pct>=50?'star':'read';
+ $('#homeHero').innerHTML=`
+ <div class="q-card-gold relative overflow-hidden p-5 sm:p-7 reveal">
+   <div class="absolute -top-12 -end-12 w-44 h-44 rounded-full bg-[var(--rose-pale)] opacity-60"></div>
+   <div class="absolute -bottom-16 -start-8 w-40 h-40 rounded-full bg-[var(--lav)] opacity-60"></div>
+   <div class="relative flex items-center gap-4 sm:gap-6 flex-wrap">
+     <div class="flex-1 min-w-[230px]">
+       <div class="flex items-center gap-2 text-[var(--ink-soft)] font-bold text-sm">${icon('calendar-days','w-4 h-4')} ${esc(dateStr)} <span class="font-en ltr" id="homeClock"></span></div>
+       <h1 class="text-[1.65rem] sm:text-4xl font-black mt-1.5 leading-snug" style="color:#8A5568">${esc(gi.g)}</h1>
+       <p class="font-poem text-lg sm:text-xl mt-2 text-[var(--rose-deep)] leading-relaxed">«${esc(dailyQuote())}»</p>
+       <div class="flex flex-wrap gap-2 mt-4">
+         <button class="btn btn-primary" id="heroStart">${icon('play')} ابدئي جلسة الدراسة</button>
+         ${state.settings.poetry?`<button class="btn btn-soft" data-nav="poetry">${icon('flower-2')} ركن الشعر</button>`:''}
+         <button class="btn btn-gold" id="heroLove">${icon('mail')} رسائلي الملكية</button>
+       </div>
+     </div>
+     <div class="bear-el w-[128px] sm:w-[158px] bear-float mx-auto">${bearSVG(bearVariant)}</div>
+   </div>
+ </div>`;
+ const tasksDoneToday=state.tasks.filter(t=>t.done&&t.doneAt===todayKey()).length;
+ const stats=[
+  {ic:'target',label:'إنجاز الجدول اليومي',val:pct+'%',grad:'linear-gradient(135deg,#E8A2B8,#C4748C)'},
+  {ic:'clock',label:'وقت الدراسة الفعلي',val:fmtSeconds(rec.studySeconds),grad:'linear-gradient(135deg,#C3A6D9,#9B7ECC)'},
+  {ic:'hourglass',label:'جلسات مكتملة اليوم',val:rec.sessions,grad:'linear-gradient(135deg,#93B8D8,#6E9BC4)'},
+  {ic:'list-checks',label:'مهام منجزة اليوم',val:tasksDoneToday,grad:'linear-gradient(135deg,#8FC1A9,#64A885)'},
+ ];
+ $('#homeStats').innerHTML=stats.map((s,i)=>`
+  <div class="q-card stat-card reveal" style="transition-delay:${i*70}ms">
+    <span class="stat-ic" style="background:${s.grad}">${icon(s.ic)}</span>
+    <div class="stat-num" data-count="${esc(s.val)}">${esc(s.val)}</div>
+    <div class="text-[.8rem] font-bold text-[var(--ink-soft)] relative z-[1]">${s.label}</div>
+  </div>`).join('');
+ const goalMet=rec.studySeconds/60>=state.settings.goalMin&&state.settings.goalMin>0;
+ $('#homeProgress').innerHTML=`
+ <div class="q-card p-5 reveal">
+   <div class="flex items-center justify-between gap-3 flex-wrap">
+     <div class="font-black flex items-center gap-2">تقدم جدول اليوم
+       ${(pct>=100||goalMet)?`<span class="crown-pop inline-flex">${icon('crown','w-6 h-6')}</span><span class="text-sm text-[var(--gold)]">وصلتِ الهدف يا ملكة!</span>`:''}
+     </div>
+     <div class="font-en font-bold text-[var(--rose-strong)]">${pct}%</div>
+   </div>
+   <div class="progress-track mt-3"><div class="progress-fill" id="homeProgFill" style="width:0%"></div></div>
+   <div class="flex justify-between text-[.78rem] font-bold text-[var(--ink-soft)] mt-2">
+     <span>هدف الدراسة اليومي: ${fmtMinutes(Math.floor(rec.studySeconds/60))} من ${fmtMinutes(state.settings.goalMin)}</span>
+     <span>${studyItems().filter(t=>rec.doneSchedule.includes(t.id)).length} من ${studyItems().length} مواد ومراجعات</span>
+   </div>
+ </div>`;
+ requestAnimationFrame(()=>{const f=$('#homeProgFill');if(f)f.style.width=pct+'%'});
+ // الآن / التالي
+ const{nowT,nextT}=currentAndNext();
+ $('#homeNow').innerHTML=`
+ <div class="q-card p-5 reveal">
+   <h3 class="font-black flex items-center gap-2">${icon('alarm-clock','w-5 h-5 text-[var(--rose-strong)]')} في هذا الوقت</h3>
+   ${nowT?`<div class="mt-3 flex items-center gap-3 flex-wrap">
+      <span class="stat-ic" style="background:${nowT.color}">${icon(nowT.icon)}</span>
+      <div class="flex-1 min-w-[140px]"><div class="font-black text-lg leading-tight">${esc(nowT.name)}</div>
+      <div class="text-sm text-[var(--ink-soft)] font-bold">${fmtClock(nowT.start)} – ${fmtClock(nowT.end)} · ${typeLabel(nowT.type)}</div></div>
+      ${nowT.type==='study'?`<button class="btn btn-primary btn-sm" data-start="${nowT.id}">${icon('play')} ابدئي الآن</button>`:''}
+    </div>`:`<p class="text-sm text-[var(--ink-soft)] mt-2">لا توجد مهمة مجدولة الآن — وقت مثالي للراحة أو جلسة حرة.</p>`}
+   ${nextT?`<div class="mt-3 pt-3 border-t border-dashed border-[var(--line)] flex items-center gap-2 text-sm">
+      <span class="font-bold text-[var(--ink-soft)]">التالية:</span>
+      <span class="inline-grid place-items-center w-7 h-7 rounded-[10px]" style="background:${nextT.color}22;color:${nextT.color}">${icon(nextT.icon,'w-4 h-4')}</span>
+      <b>${esc(nextT.name)}</b><span class="text-[var(--ink-soft)] font-bold">الساعة ${fmtClock(nextT.start)}</span>
+    </div>`:''}
+ </div>`;
+ // ملخص الجدول
+ const items=sortedSchedule();
+ $('#homeSchedule').innerHTML=`
+ <div class="q-card p-5 reveal">
+   <div class="flex items-center justify-between">
+     <h3 class="font-black flex items-center gap-2">${icon('calendar-heart','w-5 h-5 text-[var(--rose-strong)]')} جدول اليوم</h3>
+     <button class="btn btn-soft btn-sm" data-nav="schedule">الجدول الكامل ${icon('arrow-left')}</button>
+   </div>
+   <div class="flex flex-col gap-1.5 mt-3">
+   ${items.map(t=>{const st=nowTaskStatus(t),done=rec.doneSchedule.includes(t.id);return `
+    <div class="flex items-center gap-2.5 rounded-2xl px-2.5 py-2 transition-all ${st==='now'?'bg-[var(--card2)] ring-1 ring-[rgba(217,164,65,.5)]':''}">
+      <button class="check-btn !w-8 !h-8 ${done?'on':''}" data-complete="${t.id}" aria-label="إكمال">${icon('check','w-4 h-4')}</button>
+      <span class="inline-grid place-items-center w-9 h-9 rounded-[12px] flex-none" style="background:${t.color}26;color:${t.color}">${icon(t.icon,'w-[18px] h-[18px]')}</span>
+      <div class="flex-1 min-w-0"><div class="font-bold leading-tight truncate ${done?'line-through opacity-60':''}">${esc(t.name)}</div>
+      <div class="text-[.72rem] font-bold text-[var(--ink-soft)]">${fmtClock(t.start)} – ${fmtClock(t.end)}${st==='now'?' · <span style="color:var(--gold)">الآن</span>':''}</div></div>
+      ${t.type==='study'&&!done?`<button class="btn btn-primary btn-icon btn-sm" data-start="${t.id}" aria-label="ابدئي">${icon('play')}</button>`:''}
+    </div>`}).join('')}
+   </div>
+ </div>`;
+ // إجراءات سريعة
+ $('#homeActions').innerHTML=`
+ <div class="q-card p-5 reveal">
+   <h3 class="font-black flex items-center gap-2">${icon('wand-sparkles','w-5 h-5 text-[var(--rose-strong)]')} لمسات سريعة</h3>
+   <div class="grid grid-cols-2 gap-2 mt-3">
+     <button class="btn btn-soft btn-sm" id="qaRandom">${icon('shuffle')} اختاري لي مادة</button>
+     <button class="btn btn-soft btn-sm" id="qaRescue">${icon('life-buoy')} إنقاذ اليوم</button>
+     <button class="btn btn-soft btn-sm" id="qaCalm">${icon('moon-star')} ركن الهدوء</button>
+     <button class="btn btn-soft btn-sm" data-nav="notes">${icon('notebook-pen')} ملاحظاتي</button>
+   </div>
+   <div class="flex items-center gap-3 mt-4 pt-3 border-t border-dashed border-[var(--line)]">
+     <span class="stat-ic !w-10 !h-10" style="background:linear-gradient(135deg,#F6CD6B,#D9A441)">${icon('gem')}</span>
+     <div class="flex-1"><div class="font-black leading-tight"><span class="font-en">${state.points}</span> Queen Points</div>
+     <div class="text-[.75rem] font-bold text-[var(--ink-soft)]">${levelInfo().name} · سلسلة ${state.streak.count} ${state.streak.count===1?'يوم':'أيام'}</div></div>
+     <button class="btn btn-ghost btn-sm" data-nav="profile">إنجازاتي</button>
+   </div>
+ </div>`;
+ // الباقة
+ const roses=Math.round(pct/100*8);
+ $('#homeBouquet').innerHTML=`
+ <div class="q-card p-5 text-center reveal">
+   <h3 class="font-black flex items-center justify-center gap-2">${icon('flower-2','w-5 h-5 text-[var(--rose-strong)]')} باقة إنجازكِ اليوم</h3>
+   <div class="bear-el w-[150px] mx-auto mt-1">${bouquetSVG(roses)}</div>
+   <p class="text-sm font-bold text-[var(--ink-soft)] -mt-1">${pct===0?'برعم صغير ينتظر أول خطوة منكِ اليوم.':pct>=100?'باقة كاملة! يوم ملكي بامتياز.':`أزهرت ${roses} من 8 وردات... كمّلي وخلّي الباقة تكبر.`}</p>
+ </div>`;
+ // الشعر
+ if(state.settings.poetry){
+  const dayPoem=POEMS[Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/864e5)%POEMS.length];
+  const firstTwo=dayPoem.text.split('\n').slice(0,2).join('\n');
+  $('#homePoetry').innerHTML=`
+  <div class="poem-frame reveal !py-7">
+    <div class="font-poem text-sm font-bold text-[var(--gold)] mb-2">— بيت اليوم من ركن قيس وليلى —</div>
+    <div class="poem-text !text-[1.28rem] !leading-[2]">${esc(firstTwo).replace(/\n/g,'<br>')}</div>
+    <div class="text-[.75rem] font-bold text-[var(--ink-soft)] mt-2">${esc(dayPoem.poet)}</div>
+    <button class="btn btn-gold btn-sm mt-3" data-nav="poetry">${icon('flower-2')} إلى ركن الشعر</button>
+  </div>`;
+ }else $('#homePoetry').innerHTML='';
+ $('#heroStart').onclick=()=>{const n=currentAndNext();const t=(n.nowT&&n.nowT.type==='study')?n.nowT:studyItems().find(x=>!dayRec().doneSchedule.includes(x.id));if(t)startStudyFor(t,false);else{showView('timer')} };
+ $('#heroLove').onclick=()=>{showView('poetry');setTimeout(()=>{const s=$('#loveNotesSection');if(s)s.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'center'})},80)};
+ $('#qaRandom').onclick=pickRandomSubject;
+ $('#qaRescue').onclick=openRescue;
+ $('#qaCalm').onclick=()=>openFocus();
+ bindTaskButtons($('#homeHero'));bindTaskButtons($('#homeSchedule'));bindTaskButtons($('#homeNow'));
+ refreshIcons();observeReveals();tickClock();
+}
+function tickClock(){const e=$('#homeClock');if(e){const d=new Date();e.textContent=fmtClock(String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'))}}
+
+/* ---------------- الجدول: عرض وتفاعل ---------------- */
+let expandedTask=null;
+function bindTaskButtons(scope){
+ if(!scope)return;
+ scope.querySelectorAll('[data-start]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const t=state.schedule.find(x=>x.id===b.dataset.start);if(t)startStudyFor(t,true)});
+ scope.querySelectorAll('[data-complete]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();toggleScheduleDone(b.dataset.complete,b)});
+}
+function toggleScheduleDone(id,el){
+ const rec=dayRec();const t=state.schedule.find(x=>x.id===id);if(!t)return;
+ const idx=rec.doneSchedule.indexOf(id);
+ if(idx>=0){rec.doneSchedule.splice(idx,1)}
+ else{
+  rec.doneSchedule.push(id);
+  if(t.type==='study'&&!rec.awardedSchedule.includes(id)){rec.awardedSchedule.push(id);addPoints(5);toast('أحسنتِ! +5 نقاط لإكمال '+t.name,'check')}
+  burstAt(el,'petal');popSound();touchStreak();
+  if(schedulePct()>=100&&studyItems().length){state.flags.perfectDay=true}
+ }
+ save();checkBadges();renderSchedule();if(state.ui.view==='home')renderHome();updatePointsUI();
+}
+function renderSchedule(){
+ const list=$('#scheduleList');if(!list)return;
+ const rec=dayRec();const{nowT,nextT}=currentAndNext();
+ $('#scheduleNowBanner').innerHTML=nowT?`
+  <div class="q-card-gold p-4 flex items-center gap-3 flex-wrap">
+    <span class="stat-ic" style="background:${nowT.color}">${icon(nowT.icon)}</span>
+    <div class="flex-1 min-w-[160px]"><div class="text-[.72rem] font-black text-[var(--gold)]">المهمة الحالية الآن</div>
+    <div class="font-black text-lg leading-tight">${esc(nowT.name)} <span class="text-sm text-[var(--ink-soft)] font-bold">حتى ${fmtClock(nowT.end)}</span></div></div>
+    ${nextT?`<div class="text-sm font-bold text-[var(--ink-soft)]">بعدها: ${esc(nextT.name)} (${fmtClock(nextT.start)})</div>`:''}
+    ${nowT.type==='study'?`<button class="btn btn-primary btn-sm" data-start="${nowT.id}">${icon('play')} ابدئي الدراسة</button>`:''}
+  </div>`:'';
+ list.innerHTML=sortedSchedule().map(t=>{
+  const st=nowTaskStatus(t),done=rec.doneSchedule.includes(t.id),open=expandedTask===t.id;
+  const statusPill=done?`<span class="status-pill" style="background:#E5F2E8;color:#4E7D55">مكتملة</span>`
+   :st==='now'?`<span class="status-pill" style="background:#FBF0D2;color:#9A720E">جارية الآن</span>`
+   :st==='past'?`<span class="status-pill" style="background:var(--card2);color:var(--ink-faint)">انقضى وقتها</span>`
+   :`<span class="status-pill" style="background:${t.color}22;color:${t.color}">قادمة</span>`;
+  return `<div class="tl-item ${done?'done':''} ${st==='now'?'now':''}" data-tid="${t.id}">
+   <span class="tl-dot">${icon('check')}</span>
+   <article class="task-card" style="border-inline-start-color:${t.color}">
+     <div class="flex items-start gap-3 cursor-pointer" data-expand="${t.id}">
+       <span class="inline-grid place-items-center w-11 h-11 rounded-[15px] flex-none" style="background:${t.color}26;color:${t.color}">${icon(t.icon,'w-[22px] h-[22px]')}</span>
+       <div class="flex-1 min-w-0">
+         <div class="flex items-center gap-2 flex-wrap"><h3 class="task-name font-black text-[1.05rem] leading-tight">${esc(t.name)}</h3>${statusPill}</div>
+         <div class="text-[.8rem] font-bold text-[var(--ink-soft)] mt-.5">${fmtClock(t.start)} – ${fmtClock(t.end)} · ${fmtMinutes(durOf(t))} · ${typeLabel(t.type)}</div>
+       </div>
+       <button class="check-btn ${done?'on':''}" data-complete="${t.id}" aria-label="إكمال المهمة">${icon('check')}</button>
+     </div>
+     <div class="task-details ${open?'open':''}"><div>
+       <div class="pt-3 mt-3 border-t border-dashed border-[var(--line)]">
+         <label class="q-label">ملاحظات هذه المهمة</label>
+         <textarea class="q-input !py-2 text-sm" rows="2" data-note="${t.id}" placeholder="اكتبي ملاحظة سريعة... تُحفظ تلقائياً">${esc(t.note||'')}</textarea>
+         <div class="flex flex-wrap gap-2 mt-3">
+           ${t.type==='study'?`<button class="btn btn-primary btn-sm" data-start="${t.id}">${icon('play')} ابدئي الدراسة</button>`:''}
+           <button class="btn btn-soft btn-sm" data-complete="${t.id}">${icon(done?'rotate-ccw':'check')} ${done?'تراجع عن الإكمال':'تحديد كمكتملة'}</button>
+           <button class="btn btn-ghost btn-sm" data-edit="${t.id}">${icon('pencil')} تعديل</button>
+           <button class="btn btn-ghost btn-sm !text-[#C45555]" data-del="${t.id}">${icon('trash-2')} حذف</button>
+         </div>
+       </div>
+     </div></div>
+   </article>
+  </div>`}).join('');
+ bindTaskButtons(list);bindTaskButtons($('#scheduleNowBanner'));
+ list.querySelectorAll('[data-expand]').forEach(h=>h.onclick=()=>{expandedTask=expandedTask===h.dataset.expand?null:h.dataset.expand;renderSchedule()});
+ list.querySelectorAll('[data-note]').forEach(tx=>tx.addEventListener('input',debounce(()=>{const t=state.schedule.find(x=>x.id===tx.dataset.note);if(t){t.note=tx.value;save()}},350)));
+ list.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openTaskEditor(b.dataset.edit));
+ list.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{
+   const t=state.schedule.find(x=>x.id===b.dataset.del);
+   if(await confirmModal('حذف المهمة',`هل تريدين حذف «${t.name}» من الجدول نهائياً؟`,'نعم، احذفي',true)){
+     state.schedule=state.schedule.filter(x=>x.id!==t.id);save();renderSchedule();buildTimerSubjects();toast('تم الحذف','trash-2',true);
+   }});
+ refreshIcons();
+}
+const ICON_CHOICES=['book-open','feather','leaf','flask-conical','sigma','atom','languages','moon-star','coffee','utensils','bed','sparkles','clipboard-check','target','calculator','pen-line'];
+const COLOR_CHOICES=['#D99AAE','#B7A6E3','#8FC1A9','#93B8D8','#E8B48C','#C3A6D9','#D9A441','#E8A2B4','#C9B4A8'];
+function findOverlap(start,end,exceptId){
+ const s=toMin(start),e=toMin(end);
+ return state.schedule.find(t=>t.id!==exceptId&&s<toMin(t.end)&&e>toMin(t.start))||null;
+}
+function openTaskEditor(id=null){
+ const t=id?state.schedule.find(x=>x.id===id):{name:'',start:'12:00',end:'13:00',type:'study',icon:'book-open',color:'#D99AAE',note:''};
+ if(!t)return;
+ const c=openModal(`
+  <h3 class="font-black text-lg flex items-center gap-2">${icon(id?'pencil':'plus','w-5 h-5 text-[var(--rose-strong)]')} ${id?'تعديل المهمة':'مهمة جديدة في الجدول'}</h3>
+  <div class="grid gap-3 mt-4">
+    <div><label class="q-label">اسم المادة / المهمة</label><input id="teName" class="q-input" value="${esc(t.name)}" maxlength="40" placeholder="مثال: الرياضيات"></div>
+    <div class="grid grid-cols-3 gap-3">
+      <div><label class="q-label">من</label><input id="teStart" type="time" class="q-input ltr" value="${t.start}"></div>
+      <div><label class="q-label">إلى</label><input id="teEnd" type="time" class="q-input ltr" value="${t.end}"></div>
+      <div><label class="q-label">النوع</label><select id="teType" class="q-input">
+        <option value="study" ${t.type==='study'?'selected':''}>دراسة</option>
+        <option value="break" ${t.type==='break'?'selected':''}>استراحة</option>
+        <option value="rest" ${t.type==='rest'?'selected':''}>راحة / أخرى</option></select></div>
+    </div>
+    <div><label class="q-label">الأيقونة</label><div class="flex flex-wrap gap-1.5" id="teIcons">
+      ${ICON_CHOICES.map(ic=>`<button type="button" class="chip !px-2.5 ${t.icon===ic?'on':''}" data-ic="${ic}">${icon(ic,'w-4 h-4')}</button>`).join('')}</div></div>
+    <div><label class="q-label">اللون</label><div class="flex flex-wrap gap-2" id="teColors">
+      ${COLOR_CHOICES.map(col=>`<button type="button" class="w-9 h-9 rounded-full border-2 transition-transform ${t.color===col?'scale-110 border-[#D9A441]':'border-white shadow'}" style="background:${col}" data-col="${col}" aria-label="لون"></button>`).join('')}</div></div>
+    <div id="teWarn" class="hidden text-sm font-bold rounded-2xl px-4 py-3" style="background:#FDF3E3;color:#9A720E"></div>
+  </div>
+  <div class="flex gap-2 justify-end mt-5">
+    <button class="btn btn-ghost" id="teCancel">إلغاء</button>
+    <button class="btn hidden text-white" id="teForce" style="background:linear-gradient(135deg,#E9B95C,#D9A441);color:#6d4c08">حفظ رغم التداخل</button>
+    <button class="btn btn-primary" id="teSave">${icon('check')} حفظ</button>
+  </div>`);
+ let selIcon=t.icon,selColor=t.color;
+ c.querySelectorAll('[data-ic]').forEach(b=>b.onclick=()=>{selIcon=b.dataset.ic;c.querySelectorAll('[data-ic]').forEach(x=>x.classList.toggle('on',x===b))});
+ c.querySelectorAll('[data-col]').forEach(b=>b.onclick=()=>{selColor=b.dataset.col;c.querySelectorAll('[data-col]').forEach(x=>{x.classList.toggle('scale-110',x===b);x.style.borderColor=x===b?'#D9A441':'#fff'})});
+ const collect=()=>({name:c.querySelector('#teName').value.trim(),start:c.querySelector('#teStart').value,end:c.querySelector('#teEnd').value,type:c.querySelector('#teType').value,icon:selIcon,color:selColor});
+ const doSave=(force=false)=>{
+  const v=collect();
+  if(!v.name){toast('اكتبي اسم المهمة أولاً','pencil',true);return}
+  if(!v.start||!v.end||toMin(v.end)<=toMin(v.start)){toast('تحققي من وقتي البداية والنهاية','clock',true);return}
+  const ov=findOverlap(v.start,v.end,id);
+  if(ov&&!force){
+    const w=c.querySelector('#teWarn');w.classList.remove('hidden');
+    w.textContent=`تنبيه: هذا الوقت يتداخل مع «${ov.name}» (${fmtClock(ov.start)} – ${fmtClock(ov.end)}). عدّلي الوقت أو احفظي رغم التداخل.`;
+    c.querySelector('#teForce').classList.remove('hidden');return;
+  }
+  if(id)Object.assign(state.schedule.find(x=>x.id===id),v);
+  else state.schedule.push({id:uid(),note:'',...v});
+  save();closeModal();renderSchedule();buildTimerSubjects();toast(id?'تم حفظ التعديل':'أُضيفت المهمة إلى جدولك','check',true);
+ };
+ c.querySelector('#teSave').onclick=()=>doSave(false);
+ c.querySelector('#teForce').onclick=()=>doSave(true);
+ c.querySelector('#teCancel').onclick=closeModal;
+ refreshIcons();
+}
+function pickRandomSubject(){
+ const rec=dayRec();const pool=studyItems().filter(t=>!rec.doneSchedule.includes(t.id));
+ if(!pool.length){toast('رائع! أكملتِ كل مواد اليوم','crown',true);return}
+ const t=pool[Math.floor(Math.random()*pool.length)];
+ const c=openModal(`<div class="text-center">
+   <div class="bear-el w-[110px] mx-auto">${bearSVG('star')}</div>
+   <div class="text-sm font-bold text-[var(--ink-soft)] mt-1">اختارت لكِ العجلة الملكية...</div>
+   <h3 class="font-black text-2xl mt-1">${esc(t.name)}</h3>
+   <p class="text-sm text-[var(--ink-soft)] font-bold">${fmtClock(t.start)} – ${fmtClock(t.end)} · ${fmtMinutes(durOf(t))}</p>
+   <div class="flex gap-2 justify-center mt-5">
+     <button class="btn btn-ghost" id="rpAgain">${icon('shuffle')} غيرها</button>
+     <button class="btn btn-primary" id="rpGo">${icon('play')} ابدئي بها الآن</button>
+   </div></div>`);
+ burstAt(c.querySelector('.bear-el')||c,'spark');
+ c.querySelector('#rpAgain').onclick=()=>{closeModal();pickRandomSubject()};
+ c.querySelector('#rpGo').onclick=()=>{closeModal();startStudyFor(t,true)};
+}
+function openRescue(){
+ const rec=dayRec();
+ const pending=studyItems().filter(t=>!rec.doneSchedule.includes(t.id));
+ if(!pending.length){toast('لا حاجة للإنقاذ — كل المواد مكتملة. أحسنتِ!','crown',true);return}
+ const now=new Date();let cursor=Math.ceil((now.getHours()*60+now.getMinutes())/5)*5;
+ const dayEnd=23*60;
+ if(cursor>=dayEnd-10){toast('انتهى وقت اليوم الدراسي تقريباً. ارتاحي واستعدي للغد.','moon-star',true);return}
+ const totalDur=pending.reduce((a,t)=>a+durOf(t),0);
+ const avail=dayEnd-cursor;
+ const scale=totalDur>avail? avail/totalDur : 1;
+ const plan=pending.map(t=>{const d=Math.max(15,Math.round(durOf(t)*scale/5)*5);const s=cursor;cursor+=d;return{t,start:fromMin(s),end:fromMin(Math.min(cursor,dayEnd)),dur:d}});
+ const c=openModal(`
+  <h3 class="font-black text-lg flex items-center gap-2">${icon('life-buoy','w-5 h-5 text-[var(--rose-strong)]')} خطة إنقاذ اليوم</h3>
+  <p class="text-sm text-[var(--ink-soft)] mt-1.5 leading-relaxed">اقتراح لإعادة توزيع المواد المتبقية من الآن حتى 11:00 م. لن يُطبَّق شيء قبل موافقتك.${scale<1?' تم تقليص المدد نسبياً لتناسب الوقت المتبقي.':''}</p>
+  <div class="flex flex-col gap-2 mt-4 max-h-[46vh] overflow-y-auto pe-1">
+   ${plan.map(p=>`<div class="flex items-center gap-2.5 q-soft rounded-2xl px-3 py-2.5">
+     <span class="inline-grid place-items-center w-9 h-9 rounded-[12px] flex-none" style="background:${p.t.color}26;color:${p.t.color}">${icon(p.t.icon,'w-[18px] h-[18px]')}</span>
+     <b class="flex-1">${esc(p.t.name)}</b>
+     <span class="text-sm font-bold text-[var(--ink-soft)]">${fmtClock(p.start)} – ${fmtClock(p.end)} · ${p.dur} د</span></div>`).join('')}
+  </div>
+  <div class="flex gap-2 justify-end mt-5">
+    <button class="btn btn-ghost" id="rcNo">إلغاء</button>
+    <button class="btn btn-primary" id="rcYes">${icon('check')} تطبيق الخطة</button>
+  </div>`,'32rem');
+ c.querySelector('#rcNo').onclick=closeModal;
+ c.querySelector('#rcYes').onclick=()=>{
+   plan.forEach(p=>{const t=state.schedule.find(x=>x.id===p.t.id);if(t){t.start=p.start;t.end=p.end}});
+   save();closeModal();renderSchedule();if(state.ui.view==='home')renderHome();
+   toast('تم تطبيق خطة الإنقاذ. هيّا نبدأ!','life-buoy',true);
+ };
+}
+/* ============================================================
+   المؤقّت الدائري — حسابات زمنية حقيقية (timestamps)
+   ============================================================ */
+const T=()=>state.timer;
+function ringHTML(big=false){
+ return `<div class="ring-wrap ${big?'big':''}">
+  <svg class="ring-svg" viewBox="0 0 240 240">
+    <circle class="ring-inner-circle" cx="120" cy="120" r="96" opacity=".55"/>
+    <circle class="ring-bg" cx="120" cy="120" r="104"/>
+    <circle class="ring-fg" cx="120" cy="120" r="104" pathLength="100" transform="rotate(-90 120 120)"/>
+    <circle cx="120" cy="16" r="5.5" fill="var(--gold)" stroke="#fff" stroke-width="2"/>
+  </svg>
+  <div class="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
+    <div class="timer-subject font-black text-[1.02rem] sm:text-lg leading-tight" style="color:#8A5568"></div>
+    <div class="timer-time ltr mt-1">25:00</div>
+    <div class="timer-phase text-[.8rem] font-black mt-1.5 px-3 py-1 rounded-full" style="background:var(--rose-pale);color:var(--rose-strong)"></div>
+  </div>
+ </div>`;
+}
+function phaseLabel(){
+ const t=T();
+ if(t.mode==='pomodoro')return t.phase==='study'?'وقت الدراسة':t.phase==='break'?'استراحة قصيرة':'استراحة طويلة';
+ return 'جلسة دراسة';
+}
+function paintTimer(){
+ const t=T();
+ const remain=clamp(t.remainingMs,0,t.totalMs||1);
+ const frac=t.totalMs>0? remain/t.totalMs : 0;
+ $$('.ring-fg').forEach(c=>{
+   c.style.strokeDasharray=(frac*100)+' 100';
+   c.style.strokeDashoffset=(-(100-frac*100));
+ });
+ $$('.ring-svg').forEach(s=>s.parentElement.classList.toggle('ring-glow',t.running));
+ $$('.timer-time').forEach(e=>e.textContent=fmtCountdown(remain));
+ $$('.timer-subject').forEach(e=>e.textContent=t.subjectName||'جلسة دراسة');
+ $$('.timer-phase').forEach(e=>e.textContent=phaseLabel());
+ const mt=$('#miniTime');if(mt)mt.textContent=fmtCountdown(remain);
+ const ms=$('#miniSubject');if(ms)ms.textContent=t.subjectName||'جلسة دراسة';
+ updateStartButtons();
+ document.title=t.running? fmtCountdown(remain)+' · '+(t.subjectName||'دراسة')+' — Queen Study' : 'QUEEN STUDY PLANNER — مخطّط الدراسة الملكي';
+}
+let _lastBtnState='';
+function updateStartButtons(){
+ const t=T();
+ const key=(t.running?'run':'idle')+(t.remainingMs<t.totalMs-500?':partial':':full');
+ if(key===_lastBtnState)return;_lastBtnState=key;
+ const b=$('#btnStartPause');
+ if(b){b.innerHTML=icon(t.running?'pause':'play')+'<span>'+(t.running?'إيقاف مؤقت':(t.remainingMs<t.totalMs-500?'استئناف':'ابدئي'))+'</span>';b.classList.toggle('pulsing',!t.running&&t.remainingMs>=t.totalMs-500)}
+ const f=$('#focusToggle');if(f)f.innerHTML=icon(t.running?'pause':'play')+'<span>'+(t.running?'إيقاف مؤقت':'استئناف')+'</span>';
+ const mn=$('#miniToggle');if(mn)mn.innerHTML=icon(t.running?'pause':'play');
+ refreshIcons();
+}
+function creditElapsed(finishedNaturally){
+ const t=T();
+ if(t.phase!=='study')return 0;
+ const studied=Math.max(0,(t.totalMs-t.remainingMs)-t.creditedMs);
+ if(studied>1000){
+   const rec=dayRec();rec.studySeconds+=Math.floor(studied/1000);state.totals.studySeconds+=Math.floor(studied/1000);
+   t.creditedMs+=studied;touchStreak();
+ }
+ return studied;
+}
+function newSession(minutes,opts={}){
+ const t=T();
+ if(t.running)pauseTimer();
+ creditElapsed(false);
+ t.totalMs=Math.max(1,Math.round(minutes))*60000;
+ t.remainingMs=t.totalMs;t.endAt=null;t.running=false;
+ t.sessionId=uid();t.counted=false;t.creditedMs=0;
+ if(opts.subjectId!==undefined)t.subjectId=opts.subjectId;
+ if(opts.subjectName!==undefined)t.subjectName=opts.subjectName;
+ if(opts.phase)t.phase=opts.phase;
+ save();paintTimer();renderPomoInfo();
+}
+function startTimer(){
+ const t=T();ensureAudio();
+ if(t.remainingMs<=400)newSession(Math.round(t.totalMs/60000));
+ if(!t.sessionId){t.sessionId=uid();t.counted=false;t.creditedMs=0}
+ t.endAt=Date.now()+t.remainingMs;t.running=true;
+ saveNow();paintTimer();updateMini();
+}
+function pauseTimer(){
+ const t=T();if(!t.running)return;
+ t.remainingMs=Math.max(0,t.endAt-Date.now());t.running=false;t.endAt=null;
+ saveNow();paintTimer();updateMini();
+}
+function toggleTimer(){T().running?pauseTimer():(startTimer(),toast(T().phase==='study'?'بدأت الجلسة... تركيز ملكي!':'بدأت الاستراحة، ارتاحي','play'))}
+function resetTimer(){
+ const t=T();creditElapsed(false);
+ t.running=false;t.endAt=null;t.remainingMs=t.totalMs;t.sessionId=null;t.counted=false;t.creditedMs=0;
+ saveNow();paintTimer();updateMini();renderTimerStats();if(state.ui.view==='home')renderHome();
+}
+function adjustMinutes(delta){
+ const t=T();const d=delta*60000;
+ const newTotal=clamp(t.totalMs+d,60000,12*3600000);
+ const realDelta=newTotal-t.totalMs;
+ t.totalMs=newTotal;t.remainingMs=clamp(t.remainingMs+realDelta,1000,t.totalMs);
+ if(t.running)t.endAt=Date.now()+t.remainingMs;
+ save();paintTimer();
+}
+function finishTimer(){
+ const t=T();t.running=false;t.endAt=null;t.remainingMs=0;
+ creditElapsed(true);
+ const wasStudy=t.phase==='study';
+ if(wasStudy&&!t.counted){
+   t.counted=true;
+   const rec=dayRec();rec.sessions+=1;state.totals.sessions+=1;
+   const mins=Math.round(t.totalMs/60000);
+   addPoints(10+Math.floor(mins/5)*2);
+   const h=new Date().getHours();if(h<9)state.flags.earlySession=true;
+   touchStreak();
+   if(t.mode==='pomodoro')t.pomoCount+=1;
+ }
+ saveNow();paintTimer();updateMini();checkBadges();renderTimerStats();
+ chime();
+ if(t.pendingSilent){t.pendingSilent=false;save();return}
+ onSessionFinishedUI(wasStudy);
+ if(state.ui.view==='home')renderHome();
+ if(state.ui.view==='profile')renderProfile();
+}
+function onSessionFinishedUI(wasStudy){
+ const t=T();
+ if(t.mode==='pomodoro'){
+   if(wasStudy){
+     const longDue=t.pomoCount>0&&t.pomoCount%4===0;
+     const c=openModal(`<div class="text-center">
+       <div class="bear-el w-[120px] mx-auto">${bearSVG('star')}</div>
+       <h3 class="font-black text-xl mt-1">أحسنتِ يا ملكة! خلصتِ جلستج بنجاح</h3>
+       <p class="text-sm text-[var(--ink-soft)] mt-1.5">أكملتِ ${t.pomoCount} ${t.pomoCount===1?'جلسة':'جلسات'} بومودورو. ${longDue?'حان وقت استراحة طويلة مستحقة.':'استراحة قصيرة تليق بملكتي؟'}</p>
+       <div class="flex flex-wrap gap-2 justify-center mt-5">
+         <button class="btn btn-ghost" id="pfSkip">تخطي الاستراحة</button>
+         ${t.subjectId&&t.subjectId!=='free'?`<button class="btn btn-soft" id="pfDone">${icon('check')} إكمال المهمة</button>`:''}
+         <button class="btn btn-primary" id="pfBreak">${icon('coffee')} ابدئي ${longDue?'استراحة '+state.settings.pomoLong+' دقيقة':'استراحة '+state.settings.pomoBreak+' دقائق'}</button>
+       </div></div>`);
+     burstAt(c.querySelector('.bear-el'),'petal');
+     c.querySelector('#pfBreak').onclick=()=>{closeModal();newSession(longDue?state.settings.pomoLong:state.settings.pomoBreak,{phase:longDue?'longbreak':'break'});startTimer();toast('استراحة سعيدة يا ملكة','coffee')};
+     c.querySelector('#pfSkip').onclick=()=>{closeModal();newSession(state.settings.pomoStudy,{phase:'study'})};
+     const d=c.querySelector('#pfDone');if(d)d.onclick=()=>{toggleScheduleDone(t.subjectId,null);toast('تم إكمال المهمة','check',true)};
+   }else{
+     const c=openModal(`<div class="text-center">
+       <div class="bear-el w-[120px] mx-auto">${bearSVG('read')}</div>
+       <h3 class="font-black text-xl mt-1">انتهت الاستراحة يا ملكة</h3>
+       <p class="text-sm text-[var(--ink-soft)] mt-1.5">جلسة بومودورو جديدة (${state.settings.pomoStudy} دقيقة)؟</p>
+       <div class="flex gap-2 justify-center mt-5">
+         <button class="btn btn-ghost" id="pbLater">لاحقاً</button>
+         <button class="btn btn-primary" id="pbGo">${icon('play')} ابدئي الجلسة</button>
+       </div></div>`);
+     c.querySelector('#pbGo').onclick=()=>{closeModal();newSession(state.settings.pomoStudy,{phase:'study'});startTimer()};
+     c.querySelector('#pbLater').onclick=()=>{closeModal();newSession(state.settings.pomoStudy,{phase:'study'})};
+   }
+   renderPomoInfo();return;
+ }
+ const linked=t.subjectId&&t.subjectId!=='free'?state.schedule.find(x=>x.id===t.subjectId):null;
+ const c=openModal(`<div class="text-center">
+   <div class="bear-el w-[120px] mx-auto">${bearSVG('queen')}</div>
+   <h3 class="font-black text-xl mt-1">أحسنتِ يا ملكة! خلصتِ جلستج بنجاح</h3>
+   <p class="text-sm text-[var(--ink-soft)] mt-1.5">أنجزتِ جلسة «${esc(t.subjectName)}» (${fmtMinutes(Math.round(t.totalMs/60000))}). تمت إضافة نقاط الملكة لكِ.</p>
+   <div class="flex flex-wrap gap-2 justify-center mt-5">
+     <button class="btn btn-ghost" id="sfClose">إغلاق</button>
+     <button class="btn btn-soft" id="sfAgain">${icon('rotate-ccw')} جلسة جديدة</button>
+     ${linked&&!dayRec().doneSchedule.includes(linked.id)?`<button class="btn btn-primary" id="sfDone">${icon('check')} إكمال «${esc(linked.name)}»</button>`:''}
+   </div></div>`);
+ burstAt(c.querySelector('.bear-el'),'petal');setTimeout(()=>burstAt(c,'spark'),220);
+ c.querySelector('#sfClose').onclick=()=>{closeModal();resetTimer()};
+ c.querySelector('#sfAgain').onclick=()=>{closeModal();newSession(Math.round(t.totalMs/60000))};
+ const d=c.querySelector('#sfDone');if(d)d.onclick=()=>{toggleScheduleDone(linked.id,null);closeModal();resetTimer()};
+}
+/* حلقة التحديث: تعتمد على الزمن الحقيقي */
+let lastTickSec=-1;
+function timerTick(){
+ const t=T();
+ if(t.running&&t.endAt){
+   const rem=t.endAt-Date.now();
+   if(rem<=0){t.remainingMs=0;finishTimer();return}
+   t.remainingMs=rem;paintTimer();
+   const sec=Math.ceil(rem/1000);
+   if(sec!==lastTickSec){lastTickSec=sec;save()}
+ }
+}
+function restoreTimer(){
+ const t=T();
+ if(t.running&&t.endAt){
+   const rem=t.endAt-Date.now();
+   if(rem<=0){t.remainingMs=0;t.pendingSilent=true;finishTimer();
+     t.pendingMsg='أثناء غيابك اكتملت جلسة «'+(t.subjectName||'دراسة')+'» وتم احتسابها لكِ.';newSession(Math.max(1,Math.round((t.totalMs||1500000)/60000)));}
+   else t.remainingMs=rem;
+ }
+ paintTimer();renderPomoInfo();
+}
+function startStudyFor(task,announce=true){
+ const t=T();
+ const mins=t.mode==='pomodoro'?state.settings.pomoStudy:Math.max(5,durOf(task));
+ newSession(mins,{subjectId:task.id,subjectName:task.name,phase:'study'});
+ syncTimerSubjectSelect();
+ showView('timer');
+ if(announce)toast('تم تجهيز جلسة '+task.name+' — اضغطي «ابدئي»','timer',true);
+ const b=$('#btnStartPause');if(b)setTimeout(()=>b.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'center'}),120);
+}
+function setTimerMode(mode){
+ const t=T();if(t.mode===mode)return;
+ pauseTimer();creditElapsed(false);
+ t.mode=mode;
+ $$('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.mode===mode));
+ if(mode==='pomodoro'){newSession(state.settings.pomoStudy,{phase:'study'})}
+ else{newSession(state.settings.defaultSession,{phase:'study'})}
+ $('#presetRow').style.opacity=mode==='pomodoro'?.45:1;
+ $('#presetRow').style.pointerEvents=mode==='pomodoro'?'none':'auto';
+ save();renderPomoInfo();paintTimer();
+}
+function renderPomoInfo(){
+ const t=T();const wrap=$('#pomoInfo');if(!wrap)return;
+ const on=t.mode==='pomodoro';wrap.classList.toggle('hidden',!on);
+ if(on){const done=t.pomoCount%4;
+   $('#pomoDots').innerHTML=[0,1,2,3].map(i=>`<span class="pomo-dot ${i<done?'on':''}"></span>`).join('');
+   $('#pomoLabel').textContent=`جلسات بومودورو اليوم: ${t.pomoCount} · الاستراحة الطويلة بعد ${4-done} ${4-done===1?'جلسة':'جلسات'}`;
+ }
+}
+function buildTimerSubjects(){
+ const sel=$('#timerSubject');if(!sel)return;
+ const cur=T().subjectId;
+ sel.innerHTML=`<option value="free">جلسة حرة</option>`+
+  studyItems().map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('')+
+  SUBJECTS.filter(s=>!studyItems().some(t=>t.name===s)).map(s=>`<option value="subj:${esc(s)}">${esc(s)}</option>`).join('');
+ sel.value=[...sel.options].some(o=>o.value===cur)?cur:'free';
+}
+function syncTimerSubjectSelect(){const sel=$('#timerSubject');if(sel&&[...sel.options].some(o=>o.value===T().subjectId))sel.value=T().subjectId}
+function renderTimerStats(){
+ const el=$('#timerTodayStats');if(!el)return;const rec=dayRec();const li=levelInfo();
+ el.innerHTML=`<h3 class="font-black flex items-center gap-2">${icon('trending-up','w-5 h-5 text-[var(--rose-strong)]')} دراسة اليوم</h3>
+ <div class="grid grid-cols-3 gap-2 mt-3 text-center">
+   <div class="q-soft rounded-2xl py-3"><div class="font-black text-lg leading-none">${fmtSeconds(rec.studySeconds)}</div><div class="text-[.68rem] font-bold text-[var(--ink-soft)] mt-1">وقت الدراسة</div></div>
+   <div class="q-soft rounded-2xl py-3"><div class="font-black text-lg leading-none font-en">${rec.sessions}</div><div class="text-[.68rem] font-bold text-[var(--ink-soft)] mt-1">جلسات مكتملة</div></div>
+   <div class="q-soft rounded-2xl py-3"><div class="font-black text-lg leading-none font-en">${state.points}</div><div class="text-[.68rem] font-bold text-[var(--ink-soft)] mt-1">نقاط الملكة</div></div>
+ </div>
+ <div class="mt-3"><div class="flex justify-between text-[.75rem] font-bold text-[var(--ink-soft)]"><span>${li.name} (مستوى ${li.lv})</span><span>${li.need?li.need+' نقطة للمستوى التالي':'أعلى مستوى!'}</span></div>
+ <div class="progress-track !h-[10px] mt-1.5"><div class="progress-fill" style="width:${li.pct}%"></div></div></div>`;
+ refreshIcons();
+}
+function updateMini(){
+ const t=T();const m=$('#miniTimer');if(!m)return;
+ const show=(t.running||t.remainingMs<t.totalMs-500)&&state.ui.view!=='timer'&&!$('#focusOverlay').classList.contains('open')&&!$('#app').classList.contains('app-hidden');
+ m.classList.toggle('hide',!show);paintTimer();
+}
+/* ---------------- وضع التركيز / ركن الهدوء ---------------- */
+const FOCUS_QUOTES=['تركيز هادئ... صفحة واحدة في كل مرة.','أنتِ أقرب مما تظنين. كمّلي.','تنفّسي بعمق، ودعي عقلكِ يزهر.','الملكات يركّزن بهدوء وثقة.','هذه الدقائق تبني مستقبلكِ.'];
+function openFocus(){
+ $('#focusOverlay').classList.add('open');
+ $('#focusQuote').textContent='«'+FOCUS_QUOTES[Math.floor(Math.random()*FOCUS_QUOTES.length)]+'»';
+ $('#petals').style.opacity=0;paintTimer();updateMini();
+ if(window.gsap&&state.settings.anim&&!REDUCED)gsap.fromTo('#ringFocus .ring-wrap',{scale:.9,opacity:0},{scale:1,opacity:1,duration:.7,ease:'power3.out'});
+}
+function closeFocus(){$('#focusOverlay').classList.remove('open');$('#petals').style.opacity=1;updateMini()}
+
+/* ============================================================
+   قائمة المهام
+   ============================================================ */
+function taskSubjectOptions(withAll=false){
+ return (withAll?'<option value="">كل المواد</option>':'')+[...SUBJECTS,'عام'].map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('');
+}
+function renderTasks(){
+ const list=$('#taskList');if(!list)return;
+ const fs=$('#fTaskSubject').value,fp=$('#fTaskPriority').value,fst=$('#fTaskStatus').value;
+ let items=state.tasks.filter(t=>(!fs||t.subject===fs)&&(!fp||t.priority===fp)&&(!fst||(fst==='done'?t.done:!t.done)));
+ items.sort((a,b)=>(a.done-b.done)||({high:0,med:1,low:2}[a.priority]-{high:0,med:1,low:2}[b.priority])||(b.created-a.created));
+ const open=state.tasks.filter(t=>!t.done).length;
+ $('#taskCount').textContent=state.tasks.length?`${open} مهمة بانتظارك · ${state.tasks.length-open} منجزة`:'';
+ if(!items.length){list.innerHTML=`<div class="q-card p-8 text-center">
+   <div class="bear-el w-[110px] mx-auto">${bearSVG('read')}</div>
+   <p class="font-bold text-[var(--ink-soft)] mt-2">${state.tasks.length?'لا مهام مطابقة للتصفية الحالية.':'لا مهام بعد... أضيفي أول مهمة وابدئي الإنجاز.'}</p></div>`;refreshIcons();return}
+ const prioMeta={high:['عالية','#FDE8E8','#B44444'],med:['متوسطة','#FBF0D2','#9A720E'],low:['منخفضة','#E5F2E8','#4E7D55']};
+ list.innerHTML=items.map(t=>{const[pl,pb,pc]=prioMeta[t.priority];const sc=SUBJ_COLORS[t.subject]||SUBJ_COLORS['عام'];return `
+  <div class="todo-item ${t.done?'done':''}">
+    <button class="check-btn ${t.done?'on':''}" data-tdone="${t.id}" aria-label="إكمال">${icon('check')}</button>
+    <div class="flex-1 min-w-0">
+      <div class="todo-title font-bold leading-snug">${esc(t.title)}</div>
+      <div class="flex flex-wrap items-center gap-1.5 mt-1.5">
+        <span class="prio" style="background:${sc[1]};color:${sc[0]}">${esc(t.subject)}</span>
+        <span class="prio" style="background:${pb};color:${pc}">${pl}</span>
+        ${t.due?`<span class="prio" style="background:var(--lav);color:#6E5AA3">${icon('clock','w-3 h-3 inline')} ${fmtClock(t.due)}</span>`:''}
+      </div>
+    </div>
+    <button class="btn btn-ghost btn-icon btn-sm" data-tedit="${t.id}" aria-label="تعديل">${icon('pencil')}</button>
+    <button class="btn btn-ghost btn-icon btn-sm !text-[#C45555]" data-tdel="${t.id}" aria-label="حذف">${icon('trash-2')}</button>
+  </div>`}).join('');
+ list.querySelectorAll('[data-tdone]').forEach(b=>b.onclick=()=>{
+  const t=state.tasks.find(x=>x.id===b.dataset.tdone);if(!t)return;
+  t.done=!t.done;
+  if(t.done){t.doneAt=todayKey();dayRec().tasksDone+=1;
+    if(!t.pointsAwarded){t.pointsAwarded=true;addPoints(3);state.totals.tasksDone+=1;toast('+3 نقاط لإكمال المهمة','check')}
+    burstAt(b,'petal');popSound();touchStreak();
+  }else{t.doneAt=''}
+  save();checkBadges();renderTasks();updatePointsUI();if(state.ui.view==='home')renderHome();
+ });
+ list.querySelectorAll('[data-tdel]').forEach(b=>b.onclick=async()=>{
+  const t=state.tasks.find(x=>x.id===b.dataset.tdel);
+  if(await confirmModal('حذف المهمة',`حذف «${t.title}» نهائياً؟`,'نعم، احذفي',true)){
+    state.tasks=state.tasks.filter(x=>x.id!==t.id);save();renderTasks();toast('تم الحذف','trash-2',true)}
+ });
+ list.querySelectorAll('[data-tedit]').forEach(b=>b.onclick=()=>openTaskEdit(b.dataset.tedit));
+ refreshIcons();
+}
+function openTaskEdit(id){
+ const t=state.tasks.find(x=>x.id===id);if(!t)return;
+ const c=openModal(`<h3 class="font-black text-lg">تعديل المهمة</h3>
+ <div class="grid gap-3 mt-4">
+  <div><label class="q-label">المهمة</label><input id="etTitle" class="q-input" value="${esc(t.title)}" maxlength="120"></div>
+  <div class="grid grid-cols-3 gap-3">
+   <div><label class="q-label">المادة</label><select id="etSubject" class="q-input">${[...SUBJECTS,'عام'].map(s=>`<option ${t.subject===s?'selected':''}>${s}</option>`).join('')}</select></div>
+   <div><label class="q-label">الأولوية</label><select id="etPrio" class="q-input">
+     <option value="low" ${t.priority==='low'?'selected':''}>منخفضة</option><option value="med" ${t.priority==='med'?'selected':''}>متوسطة</option><option value="high" ${t.priority==='high'?'selected':''}>عالية</option></select></div>
+   <div><label class="q-label">الموعد</label><input id="etDue" type="time" class="q-input ltr" value="${t.due||''}"></div>
+  </div></div>
+ <div class="flex gap-2 justify-end mt-5"><button class="btn btn-ghost" id="etCancel">إلغاء</button><button class="btn btn-primary" id="etSave">${icon('check')} حفظ</button></div>`);
+ c.querySelector('#etCancel').onclick=closeModal;
+ c.querySelector('#etSave').onclick=()=>{const v=c.querySelector('#etTitle').value.trim();if(!v){toast('اكتبي عنوان المهمة','pencil',true);return}
+  t.title=v;t.subject=c.querySelector('#etSubject').value;t.priority=c.querySelector('#etPrio').value;t.due=c.querySelector('#etDue').value;
+  save();closeModal();renderTasks();toast('تم حفظ المهمة','check',true)};
+ refreshIcons();
+}
+
+/* ============================================================
+   الملاحظات الدراسية
+   ============================================================ */
+const NOTE_TYPES=['شرح','تعريف مهم','قانون','خطأ يجب مراجعته','سؤال يحتاج حل','نقطة للحفظ'];
+let noteFilter='الكل', editingNote=null;
+function renderNoteChips(){
+ const w=$('#noteChips');if(!w)return;
+ w.innerHTML=['الكل',...SUBJECTS,'عام'].map(s=>`<button class="chip ${noteFilter===s?'on':''}" data-nchip="${esc(s)}">${esc(s)}</button>`).join('');
+ w.querySelectorAll('[data-nchip]').forEach(b=>b.onclick=()=>{noteFilter=b.dataset.nchip;renderNoteChips();renderNotes()});
+}
+function renderNoteEditor(){
+ const w=$('#noteEditor');if(!w)return;
+ if(!editingNote){w.innerHTML='';return}
+ const n=editingNote==='new'?{subject:SUBJECTS[0],type:'شرح',title:'',body:''}:state.notes.find(x=>x.id===editingNote);
+ if(!n){w.innerHTML='';return}
+ w.innerHTML=`<div class="q-card-gold p-5">
+  <h3 class="font-black flex items-center gap-2">${icon('notebook-pen','w-5 h-5 text-[var(--rose-strong)]')} ${editingNote==='new'?'ملاحظة جديدة':'تعديل الملاحظة'}</h3>
+  <div class="grid gap-3 mt-4">
+   <input id="neTitle" class="q-input font-bold" placeholder="عنوان الملاحظة..." value="${esc(n.title)}" maxlength="90">
+   <div class="grid grid-cols-2 gap-3">
+     <div><label class="q-label">المادة</label><select id="neSubject" class="q-input">${[...SUBJECTS,'عام'].map(s=>`<option ${n.subject===s?'selected':''}>${s}</option>`).join('')}</select></div>
+     <div><label class="q-label">النوع</label><select id="neType" class="q-input">${NOTE_TYPES.map(s=>`<option ${n.type===s?'selected':''}>${s}</option>`).join('')}</select></div>
+   </div>
+   <textarea id="neBody" class="q-input" rows="5" placeholder="اكتبي الشرح أو التعريف أو القانون هنا... يُحفظ تلقائياً أثناء الكتابة">${esc(n.body)}</textarea>
+   <div class="flex items-center gap-2">
+     <span id="neSaved" class="text-xs font-bold text-[var(--good)] opacity-0 transition-opacity">تم الحفظ</span>
+     <span class="flex-1"></span>
+     <button class="btn btn-ghost btn-sm" id="neCancel">إغلاق</button>
+     ${editingNote==='new'?`<button class="btn btn-primary btn-sm" id="neSave">${icon('check')} حفظ الملاحظة</button>`:''}
+   </div>
+  </div></div>`;
+ const savedFlash=()=>{const s=$('#neSaved');if(s){s.style.opacity=1;setTimeout(()=>s.style.opacity=0,1200)}};
+ if(editingNote!=='new'){
+   const note=state.notes.find(x=>x.id===editingNote);
+   const upd=debounce(()=>{note.title=$('#neTitle').value;note.subject=$('#neSubject').value;note.type=$('#neType').value;note.body=$('#neBody').value;note.updatedAt=Date.now();save();savedFlash();renderNotes(true)},400);
+   ['#neTitle','#neSubject','#neType','#neBody'].forEach(s=>{$(s).addEventListener('input',upd);$(s).addEventListener('change',upd)});
+ }else{
+   $('#neSave').onclick=()=>{
+     const title=$('#neTitle').value.trim(),body=$('#neBody').value.trim();
+     if(!title&&!body){toast('اكتبي شيئاً أولاً','pencil',true);return}
+     state.notes.unshift({id:uid(),title:title||'ملاحظة بلا عنوان',body,subject:$('#neSubject').value,type:$('#neType').value,updatedAt:Date.now()});
+     save();editingNote=null;renderNoteEditor();renderNotes();checkBadges();toast('حُفظت الملاحظة في مخطوطاتك','notebook-pen',true);
+   };
+ }
+ $('#neCancel').onclick=()=>{editingNote=null;renderNoteEditor();renderNotes()};
+ refreshIcons();
+}
+function renderNotes(keepEditor=false){
+ const w=$('#notesList');if(!w)return;
+ const q=($('#noteSearch').value||'').trim();
+ let items=state.notes.filter(n=>(noteFilter==='الكل'||n.subject===noteFilter)&&(!q||(n.title+' '+n.body).includes(q)));
+ items.sort((a,b)=>b.updatedAt-a.updatedAt);
+ if(!items.length){w.innerHTML=`<div class="q-card p-8 text-center md:col-span-2">
+   <div class="bear-el w-[110px] mx-auto">${bearSVG('read')}</div>
+   <p class="font-bold text-[var(--ink-soft)] mt-2">${state.notes.length?'لا نتائج مطابقة لبحثك.':'مخطوطاتك فارغة بعد... دوّني أول ملاحظة ملكية.'}</p></div>`;refreshIcons();return}
+ w.innerHTML=items.map(n=>{const sc=SUBJ_COLORS[n.subject]||SUBJ_COLORS['عام'];return `
+  <article class="note-card" style="--nc:${sc[0]}">
+    <div class="flex items-start gap-2">
+      <h3 class="font-black flex-1 leading-snug">${esc(n.title)}</h3>
+      <button class="btn btn-ghost btn-icon btn-sm" data-nedit="${n.id}" aria-label="تعديل">${icon('pencil')}</button>
+      <button class="btn btn-ghost btn-icon btn-sm !text-[#C45555]" data-ndel="${n.id}" aria-label="حذف">${icon('trash-2')}</button>
+    </div>
+    <div class="flex flex-wrap gap-1.5 mt-2">
+      <span class="prio" style="background:${sc[1]};color:${sc[0]}">${esc(n.subject)}</span>
+      <span class="prio" style="background:var(--lav);color:#6E5AA3">${esc(n.type)}</span>
+      <span class="prio" style="background:var(--card2);color:var(--ink-faint)">${new Date(n.updatedAt).toLocaleDateString('ar-u-nu-latn',{day:'numeric',month:'short'})}</span>
+    </div>
+    <p class="text-sm leading-relaxed mt-2.5 whitespace-pre-wrap" style="color:var(--ink)">${esc(n.body)}</p>
+  </article>`}).join('');
+ w.querySelectorAll('[data-nedit]').forEach(b=>b.onclick=()=>{editingNote=b.dataset.nedit;renderNoteEditor();$('#noteEditor').scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'center'})});
+ w.querySelectorAll('[data-ndel]').forEach(b=>b.onclick=async()=>{
+   const n=state.notes.find(x=>x.id===b.dataset.ndel);
+   if(await confirmModal('حذف الملاحظة',`حذف «${n.title}» نهائياً؟ لا يمكن التراجع.`,'نعم، احذفي',true)){
+     state.notes=state.notes.filter(x=>x.id!==n.id);if(editingNote===n.id)editingNote=null;
+     save();renderNoteEditor();renderNotes();toast('تم حذف الملاحظة','trash-2',true)}
+ });
+ refreshIcons();
+}
+/* ============================================================
+   ركن الشعر — من قلب قيس إلى ليلى
+   ============================================================ */
+let currentPoemId=state.ui.lastPoem&&POEMS.some(p=>p.id===state.ui.lastPoem)?state.ui.lastPoem:'p1';
+function poemPool(){return state.ui.poemCat==='الكل'?POEMS:POEMS.filter(p=>p.cat===state.ui.poemCat)}
+function nextPoem(){
+ const pool=poemPool();if(!pool.length)return;
+ let cand=pool.filter(p=>p.id!==currentPoemId);if(!cand.length)cand=pool;
+ currentPoemId=cand[Math.floor(Math.random()*cand.length)].id;
+ state.ui.lastPoem=currentPoemId;save();renderPoetry(true);
+}
+async function copyText(txt){
+ try{await navigator.clipboard.writeText(txt);return true}catch(e){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();
+  let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();return ok}
+}
+function renderPoetry(animate=false){
+ const wrap=$('#poemCard');if(!wrap)return;
+ $('#poemCats').innerHTML=POEM_CATS.map(c=>`<button class="chip ${state.ui.poemCat===c?'on':''}" data-pcat="${c}">${c}</button>`).join('');
+ $('#poemCats').querySelectorAll('[data-pcat]').forEach(b=>b.onclick=()=>{state.ui.poemCat=b.dataset.pcat;save();
+   const pool=poemPool();if(pool.length&&!pool.some(p=>p.id===currentPoemId))currentPoemId=pool[0].id;renderPoetry(true)});
+ const p=POEMS.find(x=>x.id===currentPoemId)||POEMS[0];
+ const isFav=state.favPoems.includes(p.id);
+ wrap.innerHTML=`
+ <div class="poem-frame ${animate?'poem-anim':''}">
+   <span class="status-pill absolute top-4 start-5" style="background:var(--rose-pale);color:var(--rose-strong)">${esc(p.cat)}</span>
+   <div class="poem-text">${esc(p.text).replace(/\n/g,'<br>')}</div>
+   <div class="gold-orn my-4"><span></span><i></i><span></span></div>
+   <div class="font-bold text-[var(--ink-soft)]">${esc(p.poet)}</div>
+ </div>
+ <div class="flex flex-wrap justify-center gap-2 mt-4">
+   <button class="btn btn-primary" id="btnNextPoem">${icon('refresh-cw')} بيت شعر آخر</button>
+   <button class="btn btn-ghost" id="btnCopyPoem">${icon('copy')} <span>نسخ البيت</span></button>
+   <button class="btn btn-ghost" id="btnSharePoem">${icon('send')} مشاركة</button>
+   <button class="btn btn-ghost fav-heart ${isFav?'on':''}" id="btnFavPoem">${icon('heart')} ${isFav?'في المفضلة':'المفضلة'}</button>
+ </div>`;
+ $('#btnNextPoem').onclick=e=>{const ic=e.currentTarget.querySelector('svg');if(ic&&!REDUCED)ic.animate([{transform:'rotate(0)'},{transform:'rotate(-360deg)'}],{duration:550,easing:'ease-out'});nextPoem()};
+ $('#btnCopyPoem').onclick=async e=>{
+   const btn=e.currentTarget;const full='«'+p.text.replace(/\n/g,' / ')+'»\n— '+p.poet;
+   const ok=await copyText(full);
+   btn.innerHTML=icon(ok?'check':'x')+'<span>'+(ok?'تم النسخ':'تعذّر النسخ')+'</span>';refreshIcons();
+   if(ok&&!REDUCED)btn.animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}],{duration:380});
+   setTimeout(()=>renderPoetry(false),1500);
+ };
+ $('#btnSharePoem').onclick=async e=>{
+   const btn=e.currentTarget;const full='«'+p.text.replace(/\n/g,' / ')+'»\n— '+p.poet;
+   if(!REDUCED&&state.settings.anim){const r=btn.getBoundingClientRect();const fly=document.createElement('div');
+     fly.innerHTML=`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4748C" stroke-width="2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>`;
+     fly.style.cssText=`position:fixed;z-index:126;left:${r.left+r.width/2}px;top:${r.top}px;pointer-events:none`;document.body.appendChild(fly);
+     fly.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate(-70px,-60px) rotate(-14deg)',opacity:1,offset:.55},{transform:'translate(-170px,-150px) rotate(-26deg) scale(.7)',opacity:0}],{duration:950,easing:'cubic-bezier(.22,1,.36,1)'}).onfinish=()=>fly.remove();}
+   if(navigator.share){try{await navigator.share({title:'من قلب قيس إلى ليلى',text:full})}catch(_){}}
+   else{await copyText(full);toast('نُسخ البيت للمشاركة','send',true)}
+ };
+ $('#btnFavPoem').onclick=e=>{
+   const i=state.favPoems.indexOf(p.id);
+   if(i>=0)state.favPoems.splice(i,1);else{state.favPoems.push(p.id);burstAt(e.currentTarget,'spark');toast('أُضيف إلى أبياتك المفضلة','heart')}
+   save();renderPoetry(false);renderPoemFavs();
+ };
+ refreshIcons();
+}
+function renderPoemFavs(){
+ const w=$('#poemFavs');if(!w)return;
+ const favs=state.favPoems.map(id=>POEMS.find(p=>p.id===id)).filter(Boolean);
+ if(!favs.length){w.innerHTML='';return}
+ w.innerHTML=`<div class="q-card p-5">
+  <h3 class="font-black flex items-center gap-2">${icon('heart','w-5 h-5 text-[#E5587A]')} أبياتي المفضلة</h3>
+  <div class="grid md:grid-cols-2 gap-3 mt-3">
+  ${favs.map(p=>`<button class="text-start q-soft rounded-2xl p-4 hover:shadow-[var(--shadow-sm)] transition-shadow" data-loadpoem="${p.id}">
+    <div class="font-poem font-bold leading-[1.9]" style="color:#8A5568">${esc(p.text.split('\n').slice(0,2).join('\n')).replace(/\n/g,'<br>')}</div>
+    <div class="flex items-center justify-between mt-2"><span class="text-[.72rem] font-bold text-[var(--ink-soft)]">${esc(p.poet)}</span>
+    <span class="text-[.72rem] font-black text-[#C45555] underline" data-unfav="${p.id}">إزالة</span></div></button>`).join('')}
+  </div></div>`;
+ w.querySelectorAll('[data-loadpoem]').forEach(b=>b.onclick=()=>{currentPoemId=b.dataset.loadpoem;state.ui.lastPoem=currentPoemId;save();renderPoetry(true);$('#poemCard').scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'center'})});
+ w.querySelectorAll('[data-unfav]').forEach(b=>b.onclick=e=>{e.stopPropagation();state.favPoems=state.favPoems.filter(x=>x!==b.dataset.unfav);save();renderPoemFavs();renderPoetry(false)});
+ refreshIcons();
+}
+/* ---------------- الرسائل الملكية ---------------- */
+let loveIdx=(typeof state.ui.lastNote==='number'?state.ui.lastNote:-1),loveOpen=false;
+function pickNoteIdx(){let i;do{i=Math.floor(Math.random()*LOVE_NOTES.length)}while(LOVE_NOTES.length>1&&i===loveIdx);return i}
+function openLoveNote(fresh=true){
+ const env=$('#loveEnv');if(!env)return;
+ if(fresh||loveIdx<0){loveIdx=pickNoteIdx();state.ui.lastNote=loveIdx;save()}
+ const n=LOVE_NOTES[loveIdx];
+ $('#loveLetterText').textContent='«'+n.t+'»';
+ $('#loveLetterBy').textContent=n.by?'— '+n.by:'';
+ env.classList.add('open');loveOpen=true;popSound();
+ setTimeout(()=>{const r=$('#loveNoteRead');r.textContent='«'+n.t+'»'+(n.by?' — '+n.by:'');r.classList.remove('hidden');
+   if(!REDUCED&&state.settings.anim)r.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:500,easing:'ease-out'})},950);
+}
+function closeLoveNote(){$('#loveEnv').classList.remove('open');$('#loveNoteRead').classList.add('hidden');loveOpen=false}
+function renderFavNotes(){
+ const w=$('#favNotesList');if(!w)return;
+ if(!state.favNotes.length){w.innerHTML='';return}
+ w.innerHTML=`<h4 class="font-black text-sm flex items-center gap-2">${icon('bookmark','w-4 h-4 text-[var(--gold)]')} رسائلي المحفوظة</h4>
+ <div class="flex flex-col gap-2 mt-2">
+ ${state.favNotes.map((n,i)=>`<div class="flex items-start gap-2 q-soft rounded-2xl px-4 py-3">
+   <p class="flex-1 font-poem leading-relaxed" style="color:#8A5568">«${esc(n.t)}»${n.by?` <span class="text-xs font-bold text-[var(--ink-soft)]">— ${esc(n.by)}</span>`:''}</p>
+   <button class="btn btn-ghost btn-icon btn-sm !text-[#C45555]" data-fndel="${i}" aria-label="حذف">${icon('x')}</button></div>`).join('')}
+ </div>`;
+ w.querySelectorAll('[data-fndel]').forEach(b=>b.onclick=()=>{state.favNotes.splice(+b.dataset.fndel,1);save();renderFavNotes()});
+ refreshIcons();
+}
+
+/* ============================================================
+   ملف الإنجازات: نقاط، شارات، رسم بياني، تقويم، يوميات
+   ============================================================ */
+function renderProfile(){
+ const li=levelInfo(),rec=dayRec(),pct=schedulePct();
+ $('#profileTop').innerHTML=`
+ <div class="q-card-gold p-5 sm:p-6 relative overflow-hidden reveal">
+   <div class="absolute -top-10 -end-10 w-40 h-40 rounded-full bg-[var(--rose-pale)] opacity-60"></div>
+   <div class="relative flex items-center gap-5 flex-wrap">
+     <div class="bear-el w-[118px] bear-float">${bearSVG(pct>=100?'queen':rec.sessions>0?'star':'read')}</div>
+     <div class="flex-1 min-w-[220px]">
+       <div class="font-en tracking-[.3em] text-[.65rem] font-semibold text-[var(--rose-strong)] ltr">QUEEN POINTS</div>
+       <div class="flex items-end gap-2 mt-1"><span class="font-en font-bold text-5xl leading-none" style="color:#8A5568">${state.points}</span>
+       <span class="font-bold text-[var(--ink-soft)] mb-1">نقطة ملكية</span></div>
+       <div class="flex items-center justify-between text-[.78rem] font-bold text-[var(--ink-soft)] mt-3">
+         <span class="text-[var(--gold)]">المستوى ${li.lv} — ${li.name}</span><span>${li.need?li.need+' نقطة للمستوى التالي':'بلغتِ أعلى مستوى'}</span></div>
+       <div class="progress-track !h-[12px] mt-1.5"><div class="progress-fill" style="width:${li.pct}%"></div></div>
+       <div class="grid grid-cols-4 gap-2 mt-4 text-center">
+         ${[[icon('flame','w-4 h-4 inline text-[#E88A5A]')+' '+state.streak.count,'سلسلة حالية'],[state.streak.best,'أطول سلسلة'],[state.totals.sessions,'جلسة كاملة'],[fmtSeconds(state.totals.studySeconds),'إجمالي الدراسة']].map(([v,l])=>`
+         <div class="q-soft rounded-2xl py-2.5 px-1"><div class="font-black leading-none">${v}</div><div class="text-[.64rem] font-bold text-[var(--ink-soft)] mt-1">${l}</div></div>`).join('')}
+       </div>
+     </div>
+   </div>
+ </div>`;
+ $('#badgesWrap').innerHTML=`
+ <div class="q-card p-5 reveal">
+   <h3 class="font-black flex items-center gap-2">${icon('award','w-5 h-5 text-[var(--gold)]')} شارات المملكة <span class="text-sm text-[var(--ink-soft)] font-bold">(${state.badges.length} من ${BADGE_DEFS.length})</span></h3>
+   <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+   ${BADGE_DEFS.map(b=>{const un=state.badges.includes(b.id);return `
+     <div class="badge-card ${un?'':'locked'}">
+       <span class="badge-ic">${icon(un?b.icon:'lock')}</span>
+       <div class="font-black text-sm mt-2.5 leading-tight">${b.name}</div>
+       <div class="font-en text-[.62rem] tracking-wide text-[var(--ink-faint)]">${b.en}</div>
+       <div class="text-[.72rem] font-bold text-[var(--ink-soft)] mt-1 leading-snug">${b.desc}</div>
+     </div>`}).join('')}
+   </div>
+ </div>`;
+ // الرسم البياني: آخر 7 أيام
+ const days=[];for(let i=6;i>=0;i--)days.push(keyShift(todayKey(),-i));
+ const mins=days.map(k=>Math.round(((state.days[k]||{}).studySeconds||0)/60));
+ const maxM=Math.max(60,...mins);
+ $('#chartWrap').innerHTML=`
+ <div class="q-card p-5 reveal">
+   <h3 class="font-black flex items-center gap-2">${icon('trending-up','w-5 h-5 text-[var(--rose-strong)]')} ساعات الدراسة — آخر 7 أيام</h3>
+   <div class="flex items-end gap-2 sm:gap-3 h-40 mt-5 px-1">
+   ${days.map((k,i)=>{const[y,m,d]=k.split('-').map(Number);const dt=new Date(y,m-1,d);
+     return `<div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end">
+       <div class="text-[.66rem] font-black text-[var(--rose-strong)]">${mins[i]?fmtMinutes(mins[i]):''}</div>
+       <div class="chart-bar w-full max-w-[34px]" style="height:${Math.max(3,mins[i]/maxM*72)}%" title="${mins[i]} دقيقة"></div>
+       <div class="text-[.66rem] font-bold ${k===todayKey()?'text-[var(--gold)]':'text-[var(--ink-soft)]'}">${dt.toLocaleDateString('ar-u-nu-latn',{weekday:'short'})}</div>
+     </div>`}).join('')}
+   </div>
+   <p class="text-[.75rem] font-bold text-[var(--ink-faint)] mt-3">تُحتسب فقط أوقات الجلسات الفعلية عبر المؤقّت.</p>
+ </div>`;
+ const roses=Math.round(pct/100*8);
+ $('#bouquetWrap').innerHTML=`
+ <div class="q-card p-5 text-center reveal">
+   <h3 class="font-black flex items-center justify-center gap-2">${icon('flower-2','w-5 h-5 text-[var(--rose-strong)]')} باقة اليوم</h3>
+   <div class="bear-el w-[168px] mx-auto">${bouquetSVG(roses)}</div>
+   <p class="text-sm font-bold text-[var(--ink-soft)]">إنجاز جدول اليوم: <span class="font-en text-[var(--rose-strong)]">${pct}%</span> · تُزهر وردة جديدة مع كل تقدّم.</p>
+ </div>`;
+ renderCalendar();renderDiary();
+ refreshIcons();observeReveals();
+}
+function renderCalendar(){
+ const w=$('#calendarWrap');if(!w)return;
+ const cur=state.ui.calCursor||todayKey().slice(0,7);
+ let[y,m]=cur.split('-').map(Number);
+ const first=new Date(y,m-1,1),startDay=first.getDay(),dim=new Date(y,m,0).getDate(),prevDim=new Date(y,m-1,0).getDate();
+ const title=first.toLocaleDateString('ar-u-nu-latn',{month:'long',year:'numeric'});
+ const sel=state.ui.calSelected||todayKey();
+ let cells='';
+ const wd=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+ for(let i=0;i<42;i++){
+   const dnum=i-startDay+1;let key,other=false,dn=dnum;
+   if(dnum<1){dn=prevDim+dnum;key=todayKey(new Date(y,m-2,dn));other=true}
+   else if(dnum>dim){dn=dnum-dim;key=todayKey(new Date(y,m,dn));other=true}
+   else key=todayKey(new Date(y,m-1,dn));
+   const rec=state.days[key];const mins=rec?Math.round(rec.studySeconds/60):0;
+   const alpha=mins?clamp(.18+mins/300*.67,.18,.85):0;
+   const isToday=key===todayKey(),future=key>todayKey();
+   const pctD=rec&&studyItems().length?Math.round(rec.doneSchedule.filter(id=>studyItems().some(t=>t.id===id)).length/studyItems().length*100):0;
+   cells+=`<button class="cal-cell ${other?'other':''} ${isToday?'today':''} ${sel===key?'sel':''} ${future?'future':''}" data-calday="${key}"
+     style="background:${sel===key?'':mins?`rgba(217,154,174,${alpha})`:'var(--card2)'};color:${alpha>.55&&sel!==key?'#fff':''}">
+     <span>${dn}</span>${pctD>=100?'<span class="w-1.5 h-1.5 rounded-full" style="background:var(--gold)"></span>':mins?'<span class="text-[.52rem] font-en opacity-80 ltr">'+mins+'m</span>':''}
+   </button>`;
+   if(i>=startDay+dim-1&&(i+1)%7===0)break;
+ }
+ w.innerHTML=`<div class="q-card p-5 reveal">
+   <div class="flex items-center justify-between">
+     <h3 class="font-black flex items-center gap-2">${icon('calendar-days','w-5 h-5 text-[var(--rose-strong)]')} سجل الإنجازات</h3>
+     <div class="flex items-center gap-1.5">
+       <button class="btn btn-ghost btn-icon btn-sm" id="calPrev" aria-label="الشهر السابق">${icon('chevron-right')}</button>
+       <span class="font-black text-sm min-w-[110px] text-center">${title}</span>
+       <button class="btn btn-ghost btn-icon btn-sm" id="calNext" aria-label="الشهر التالي">${icon('chevron-left')}</button>
+     </div>
+   </div>
+   <div class="grid grid-cols-7 gap-1.5 mt-4 text-center text-[.64rem] font-black text-[var(--ink-faint)]">${wd.map(d=>`<div>${d.slice(0,5)}</div>`).join('')}</div>
+   <div class="grid grid-cols-7 gap-1.5 mt-1.5">${cells}</div>
+   <div class="flex items-center gap-4 mt-3 text-[.7rem] font-bold text-[var(--ink-soft)]">
+     <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded" style="background:rgba(217,154,174,.35)"></span>دراسة أقل</span>
+     <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded" style="background:rgba(217,154,174,.85)"></span>دراسة أكثر</span>
+     <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full" style="background:var(--gold)"></span>جدول مكتمل</span>
+   </div>
+ </div>`;
+ w.querySelector('#calPrev').onclick=()=>{const d=new Date(y,m-2,1);state.ui.calCursor=todayKey(d).slice(0,7);save();renderCalendar()};
+ w.querySelector('#calNext').onclick=()=>{const d=new Date(y,m,1);state.ui.calCursor=todayKey(d).slice(0,7);save();renderCalendar()};
+ w.querySelectorAll('[data-calday]').forEach(b=>b.onclick=()=>{state.ui.calSelected=b.dataset.calday;save();renderCalendar();renderDayDetail()});
+ renderDayDetail();refreshIcons();
+}
+function renderDayDetail(){
+ const w=$('#dayDetail');if(!w)return;
+ const key=state.ui.calSelected||todayKey();
+ const[y,m,d]=key.split('-').map(Number);const dt=new Date(y,m-1,d);
+ const title=dt.toLocaleDateString('ar-u-nu-latn',{weekday:'long',day:'numeric',month:'long'});
+ if(key>todayKey()){w.innerHTML=`<div class="q-card p-5 reveal"><h3 class="font-black">${title}</h3><p class="text-sm text-[var(--ink-soft)] mt-2">يوم قادم... خططي له من جدولك الدراسي.</p></div>`;refreshIcons();return}
+ const rec=state.days[key]||{doneSchedule:[],studySeconds:0,sessions:0,tasksDone:0,diary:{summary:'',best:'',improve:''}};
+ const items=studyItems();
+ const doneNames=rec.doneSchedule.map(id=>{const t=state.schedule.find(x=>x.id===id);return t?t.name:null}).filter(Boolean);
+ const undone=items.filter(t=>!rec.doneSchedule.includes(t.id)).map(t=>t.name);
+ const tasksThatDay=state.tasks.filter(t=>t.done&&t.doneAt===key).length;
+ w.innerHTML=`<div class="q-card p-5 reveal">
+   <h3 class="font-black flex items-center gap-2">${icon('scroll-text','w-5 h-5 text-[var(--gold)]')} ${title} ${key===todayKey()?'<span class="status-pill" style="background:#FBF0D2;color:#9A720E">اليوم</span>':''}</h3>
+   <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+     <div class="q-soft rounded-2xl py-3"><div class="font-black leading-none">${fmtSeconds(rec.studySeconds)}</div><div class="text-[.64rem] font-bold text-[var(--ink-soft)] mt-1">وقت الدراسة</div></div>
+     <div class="q-soft rounded-2xl py-3"><div class="font-black leading-none font-en">${rec.sessions}</div><div class="text-[.64rem] font-bold text-[var(--ink-soft)] mt-1">جلسات</div></div>
+     <div class="q-soft rounded-2xl py-3"><div class="font-black leading-none font-en">${tasksThatDay}</div><div class="text-[.64rem] font-bold text-[var(--ink-soft)] mt-1">مهام منجزة</div></div>
+   </div>
+   <div class="mt-4"><div class="font-black text-sm flex items-center gap-1.5">${icon('check','w-4 h-4 text-[var(--good)]')} مواد مكتملة</div>
+   ${doneNames.length?`<div class="flex flex-wrap gap-1.5 mt-2">${doneNames.map(n=>`<span class="prio" style="background:#E5F2E8;color:#4E7D55">${esc(n)}</span>`).join('')}</div>`:'<p class="text-sm text-[var(--ink-faint)] mt-1.5">لا شيء مسجل.</p>'}</div>
+   <div class="mt-3"><div class="font-black text-sm flex items-center gap-1.5">${icon('hourglass','w-4 h-4 text-[var(--rose-strong)]')} مواد لم تكتمل</div>
+   ${undone.length?`<div class="flex flex-wrap gap-1.5 mt-2">${undone.map(n=>`<span class="prio" style="background:var(--card2);color:var(--ink-soft)">${esc(n)}</span>`).join('')}</div>`:'<p class="text-sm font-bold mt-1.5" style="color:var(--gold)">الكل مكتمل — يوم مثالي!</p>'}</div>
+   ${rec.diary&&(rec.diary.summary||rec.diary.best||rec.diary.improve)?`
+   <div class="mt-4 pt-3 border-t border-dashed border-[var(--line)]">
+     <div class="font-black text-sm flex items-center gap-1.5">${icon('book-heart','w-4 h-4 text-[var(--rose-strong)]')} من يوميات هذا اليوم</div>
+     ${rec.diary.summary?`<p class="text-sm mt-2"><b>ملخص اليوم:</b> ${esc(rec.diary.summary)}</p>`:''}
+     ${rec.diary.best?`<p class="text-sm mt-1"><b>أفضل إنجاز:</b> ${esc(rec.diary.best)}</p>`:''}
+     ${rec.diary.improve?`<p class="text-sm mt-1"><b>للتحسين:</b> ${esc(rec.diary.improve)}</p>`:''}
+   </div>`:''}
+ </div>`;
+ refreshIcons();
+}
+function renderDiary(){
+ const w=$('#diaryWrap');if(!w)return;const rec=dayRec();
+ w.innerHTML=`<div class="q-card p-5 reveal">
+   <h3 class="font-black flex items-center gap-2">${icon('book-heart','w-5 h-5 text-[var(--rose-strong)]')} يومياتي الدراسية <span class="font-en text-[.65rem] tracking-widest text-[var(--ink-faint)] ltr">MY STUDY DIARY</span></h3>
+   <div class="grid md:grid-cols-3 gap-3 mt-4">
+     <div><label class="q-label">ملخص اليوم</label><textarea class="q-input" rows="3" id="diarySummary" placeholder="كيف كان يومك الدراسي؟">${esc(rec.diary.summary)}</textarea></div>
+     <div><label class="q-label">أفضل إنجاز</label><textarea class="q-input" rows="3" id="diaryBest" placeholder="شيء تفخرين به اليوم...">${esc(rec.diary.best)}</textarea></div>
+     <div><label class="q-label">أحتاج تحسين</label><textarea class="q-input" rows="3" id="diaryImprove" placeholder="نقطة واحدة للغد...">${esc(rec.diary.improve)}</textarea></div>
+   </div>
+   <div class="text-[.72rem] font-bold text-[var(--ink-faint)] mt-2 flex items-center gap-1.5">${icon('cloud','w-3.5 h-3.5')} تُحفظ تلقائياً على جهازك، وتظهر عند اختيار هذا اليوم من التقويم.</div>
+ </div>`;
+ const upd=debounce(()=>{const r=dayRec();r.diary.summary=$('#diarySummary').value;r.diary.best=$('#diaryBest').value;r.diary.improve=$('#diaryImprove').value;save()},350);
+ ['#diarySummary','#diaryBest','#diaryImprove'].forEach(s=>$(s).addEventListener('input',upd));
+ refreshIcons();
+}
+
+/* ============================================================
+   الإعدادات
+   ============================================================ */
+function applySettings(){
+ const s=state.settings;
+ document.documentElement.dataset.theme=s.theme==='night'?'night':'pink';
+ document.body.classList.toggle('no-bears',!s.bears);
+ document.body.classList.toggle('reduce-motion',!s.anim);
+ $$('.theme-pick').forEach(el=>el.classList.toggle('on',el.dataset.themePick===s.theme));
+ const sb=$('#btnSound');if(sb)sb.innerHTML=icon(s.sound?'volume-2':'volume-x');
+ buildNav();
+ if(!s.poetry&&state.ui.view==='poetry')showView('home');
+ refreshIcons();
+}
+function bindSettings(){
+ const s=state.settings;
+ const map=[['setWelcome','welcome'],['setSound','sound'],['setAnim','anim'],['setPetals','petals'],['setBears','bears'],['setPoetry','poetry'],['setNotify','notify']];
+ map.forEach(([id,key])=>{const el=$('#'+id);if(!el)return;el.checked=!!s[key];
+   el.onchange=()=>{state.settings[key]=el.checked;save();applySettings();
+     if(key==='petals'&&el.checked)petals.start();
+     if(key==='welcome'){const w=$('#welcomeSkipChk');if(w)w.checked=!el.checked}}});
+ const nums=[['setGoal','goalMin',10,1200],['setDefaultSession','defaultSession',5,480],['setPomoStudy','pomoStudy',5,180],['setPomoBreak','pomoBreak',1,60],['setPomoLong','pomoLong',5,120]];
+ nums.forEach(([id,key,lo,hi])=>{const el=$('#'+id);if(!el)return;el.value=s[key];
+   el.onchange=()=>{const v=clamp(Math.round(+el.value||s[key]),lo,hi);el.value=v;state.settings[key]=v;save();toast('تم حفظ الإعداد','check')}});
+ $$('.theme-pick').forEach(el=>el.onclick=()=>{state.settings.theme=el.dataset.themePick;save();applySettings()});
+ $('#btnShowWelcome').onclick=()=>showWelcomeAgain();
+ $('#btnExport').onclick=exportData;
+ $('#btnImport').onclick=()=>$('#importFile').click();
+ $('#importFile').onchange=importData;
+ $('#btnResetAll').onclick=async()=>{
+   if(await confirmModal('إعادة ضبط كل البيانات','سيتم حذف الجدول والمهام والملاحظات والإنجازات وكل شيء نهائياً. هل أنتِ متأكدة؟','نعم، احذفي كل شيء',true)){
+     if(await confirmModal('تأكيد أخير','هذا الإجراء لا يمكن التراجع عنه. متابعة؟','حذف نهائي',true)){
+       try{localStorage.removeItem(LS_KEY)}catch(e){} location.reload();
+     }}};
+}
+function exportData(){
+ try{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='queen-study-backup-'+todayKey()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  toast('تم تصدير نسختك الاحتياطية','download',true);
+ }catch(e){toast('تعذّر التصدير على هذا المتصفح','x',true)}
+}
+async function importData(ev){
+ const f=ev.target.files[0];ev.target.value='';if(!f)return;
+ try{
+  const txt=await f.text();const p=JSON.parse(txt);
+  if(!p||typeof p!=='object'||!p.settings||!Array.isArray(p.schedule))throw new Error('invalid');
+  if(!await confirmModal('استيراد نسخة احتياطية','ستحل البيانات المستوردة محل بياناتك الحالية بالكامل. متابعة؟','استيراد'))return;
+  const d=defaultState();
+  state={...d,...p,settings:{...d.settings,...p.settings},timer:{...d.timer,...(p.timer||{}),running:false,endAt:null},
+    totals:{...d.totals,...(p.totals||{})},streak:{...d.streak,...(p.streak||{})},ui:{...d.ui,...(p.ui||{}),view:'home'}};
+  saveNow();buildTimerSubjects();restoreTimer();applySettings();bindSettings();updatePointsUI();
+  showView('home');toast('تم استيراد بياناتك بنجاح','upload',true);
+ }catch(e){toast('الملف غير صالح أو تالف — لم يتم تغيير شيء','x',true)}
+}
+
+/* ============================================================
+   التنقل والحركة
+   ============================================================ */
+const NAV_ITEMS=[
+ {id:'home',label:'الرئيسية',ic:'home'},{id:'schedule',label:'الجدول الدراسي',ic:'calendar-heart'},
+ {id:'timer',label:'المؤقّت',ic:'timer'},{id:'tasks',label:'المهام',ic:'list-checks'},
+ {id:'notes',label:'الملاحظات',ic:'notebook-pen'},{id:'poetry',label:'ركن قيس وليلى',ic:'flower-2'},
+ {id:'profile',label:'إنجازاتي',ic:'crown'},{id:'settings',label:'الإعدادات',ic:'settings'},
+];
+function buildNav(){
+ const w=$('#sideNav');if(!w)return;
+ w.innerHTML=NAV_ITEMS.filter(n=>n.id!=='poetry'||state.settings.poetry).map(n=>
+  `<button class="nav-btn ${state.ui.view===n.id?'on':''}" data-nav="${n.id}">${icon(n.ic)} ${n.label}</button>`).join('');
+ refreshIcons();
+}
+function showView(name){
+ if(name==='poetry'&&!state.settings.poetry)name='home';
+ if(!$('#view-'+name))name='home';
+ state.ui.view=name;save();
+ $$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));
+ $$('#sideNav [data-nav], #bottomNav [data-nav]').forEach(b=>b.classList.toggle('on',b.dataset.nav===name));
+ window.scrollTo(0,0);
+ const view=$('#view-'+name);
+ if(window.gsap&&state.settings.anim&&!REDUCED){
+   gsap.fromTo(view,{opacity:0,y:26,rotateX:2.5,transformPerspective:1200},{opacity:1,y:0,rotateX:0,duration:.55,ease:'power3.out',clearProps:'opacity,transform'});
+ }
+ if(name==='home')renderHome();
+ if(name==='schedule')renderSchedule();
+ if(name==='timer'){paintTimer();renderPomoInfo();renderTimerStats();syncTimerSubjectSelect()}
+ if(name==='tasks')renderTasks();
+ if(name==='poetry'){renderPoetry(false);renderPoemFavs();renderFavNotes()}
+ if(name==='notes'){renderNoteChips();renderNotes()}
+ if(name==='profile')renderProfile();
+ refreshSideBear();updateMini();observeReveals();refreshIcons();
+}
+let lastSideBear='';
+function refreshSideBear(){
+ const pct=schedulePct();const v=pct>=100?'queen':pct>=50?'star':'read';
+ if(v!==lastSideBear){lastSideBear=v;const sb=$('#sideBear');if(sb)sb.innerHTML=bearSVG(v)}
+}
+let revealObs=null;
+function observeReveals(){
+ if(REDUCED||!state.settings.anim||!('IntersectionObserver' in window)){$$('.reveal').forEach(e=>e.classList.add('in'));return}
+ if(!revealObs)revealObs=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');revealObs.unobserve(en.target)}}),{threshold:.06,rootMargin:'0px 0px -4% 0px'});
+ $$('.reveal:not(.in)').forEach(e=>revealObs.observe(e));
+}
+
+/* ============================================================
+   شاشة الترحيب
+   ============================================================ */
+let welcomeEntered=false,welcomeAutoTimer=null;
+function updateWelcomeGreeting(){
+ const gi=greetingInfo();
+ const g=$('#welcomeGreeting');if(g)g.textContent=gi.g;
+ const s=$('#welcomeSub');if(s)s.textContent=gi.sub;
+ const b=$('#enterBtnText');if(b)b.textContent=gi.btn;
+}
+function buildWelcomeDeco(){
+ const w=$('#welcomeDeco');if(!w)return;let html='';
+ const star='<svg viewBox="0 0 24 24" fill="COLOR"><path d="M12 1l2.4 8.6L23 12l-8.6 2.4L12 23l-2.4-8.6L1 12l8.6-2.4z"/></svg>';
+ const heart='<svg viewBox="0 0 24 24" fill="COLOR"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
+ const cols=['#E8A2B8','#F3C969','#D99AAE','#C9B2E8'];
+ for(let i=0;i<16;i++){const sz=10+Math.random()*14;
+   html+=`<span class="w-deco" style="left:${Math.random()*96}%;top:${Math.random()*92}%;width:${sz}px;animation:twinkle ${2.4+Math.random()*2.4}s ease-in-out ${Math.random()*2}s infinite">${star.replace('COLOR',cols[i%4])}</span>`}
+ for(let i=0;i<6;i++){const sz=14+Math.random()*12;
+   html+=`<span class="w-deco" style="left:${6+Math.random()*88}%;bottom:-30px;width:${sz}px;opacity:0;animation:driftUp ${9+Math.random()*7}s linear ${Math.random()*8}s infinite">${heart.replace('COLOR',i%2?'#EEB9C9':'#E58AA5')}</span>`}
+ w.innerHTML=html;
+}
+function enterApp(){
+ if(welcomeEntered)return;welcomeEntered=true;clearTimeout(welcomeAutoTimer);
+ const w=$('#welcome');w.classList.add('w-exit');
+ const app=$('#app');app.classList.remove('app-hidden');
+ if(window.gsap&&state.settings.anim&&!REDUCED){
+   gsap.fromTo('#view-'+state.ui.view+' .q-card, #view-'+state.ui.view+' .q-card-gold',{y:24,opacity:0},{y:0,opacity:1,duration:.7,stagger:.06,ease:'power3.out',delay:.2,clearProps:'all'});
+ }
+ setTimeout(()=>{w.style.display='none';observeReveals()},850);
+ if(T().pendingMsg){setTimeout(()=>toast(T().pendingMsg,'moon-star',true),700);T().pendingMsg='';save()}
+ updateMini();
+}
+function showWelcomeAgain(){
+ welcomeEntered=false;
+ const w=$('#welcome');w.style.display='flex';
+ requestAnimationFrame(()=>w.classList.remove('w-exit'));
+ const wm=$('#welcomeMain');wm.classList.remove('hidden');wm.style.opacity='';wm.style.transform='';
+ $('#welcomeLetter').classList.add('hidden');$('#welcomeLetter').classList.remove('flex');
+ $('#welcomeEnv').classList.remove('open');
+ const go=$('#welcomeGoBtn');go.classList.add('opacity-0','pointer-events-none');
+ $('#welcomeSkipChk').checked=!state.settings.welcome;
+ updateWelcomeGreeting();closeFocus();
+}
+function setupWelcome(){
+ $('#welcomeBear').innerHTML=bearSVG('welcome');
+ buildWelcomeDeco();updateWelcomeGreeting();
+ const chk=$('#welcomeSkipChk');chk.checked=!state.settings.welcome;
+ $('#enterBtn').onclick=e=>{
+   ensureAudio();
+   if(chk.checked){state.settings.welcome=false;save();const sw=$('#setWelcome');if(sw)sw.checked=false}
+   burstAt(e.currentTarget,'spark');popSound();
+   const bear=$('#welcomeBear');
+   if(window.gsap&&state.settings.anim&&!REDUCED){
+     gsap.timeline()
+       .to(bear,{y:-22,scale:1.07,rotation:-3,duration:.32,ease:'power2.out'})
+       .to(bear,{y:0,scale:1,rotation:2,duration:.4,ease:'bounce.out'})
+       .to('#welcomeMain',{opacity:0,y:-18,scale:.97,duration:.45,ease:'power2.in',onComplete:showWelcomeEnvelope},'-=.1');
+   }else{$('#welcomeMain').style.opacity=0;setTimeout(showWelcomeEnvelope,250)}
+ };
+ const go=()=>enterApp();
+ $('#welcomeGoBtn').onclick=go;$('#welcomeSkipBtn').onclick=go;
+ $('#welcomeEnv').onclick=()=>{if($('#welcomeEnv').classList.contains('open'))go()};
+ if(!state.settings.welcome){$('#welcome').style.display='none';enterApp()}
+}
+function showWelcomeEnvelope(){
+ $('#welcomeMain').classList.add('hidden');
+ const lw=$('#welcomeLetter');lw.classList.remove('hidden');lw.classList.add('flex');
+ const p=POEMS[Math.floor(Math.random()*POEMS.length)];
+ $('#welcomeVerse').innerHTML=esc(p.text.split('\n').slice(0,2).join('\n')).replace(/\n/g,'<br>');
+ $('#welcomeVerseBy').textContent=p.poet;
+ const env=$('#welcomeEnv');
+ if(window.gsap&&state.settings.anim&&!REDUCED)gsap.fromTo(env,{scale:.7,opacity:0,y:26,rotateX:14,transformPerspective:900},{scale:1,opacity:1,y:0,rotateX:0,duration:.65,ease:'back.out(1.5)'});
+ setTimeout(()=>{env.classList.add('open');burstAt(env,'petal')},420);
+ setTimeout(()=>{const go=$('#welcomeGoBtn');go.classList.remove('opacity-0','pointer-events-none')},1400);
+ welcomeAutoTimer=setTimeout(()=>{if(!welcomeEntered)enterApp()},5200);
+}
+
+/* ============================================================
+   ربط الأحداث العامة والتهيئة
+   ============================================================ */
+function bindGlobal(){
+ document.addEventListener('click',e=>{
+   const b=e.target.closest('[data-nav]');if(b){ensureAudio();showView(b.dataset.nav)}
+ });
+ document.addEventListener('pointerdown',e=>{
+   ensureAudio();
+   const b=e.target.closest('.btn,.enter-btn');
+   if(b&&state.settings.anim&&!REDUCED){
+     const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height),s=document.createElement('span');
+     s.className='ripple-ink';s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
+     b.appendChild(s);setTimeout(()=>s.remove(),600);
+   }
+ },{passive:true});
+ // ميلان ثلاثي الأبعاد خفيف للبطاقات الذهبية (فأرة فقط)
+ if(matchMedia('(pointer:fine)').matches&&!REDUCED){
+   let cur=null;
+   document.addEventListener('mousemove',e=>{
+     if(!state.settings.anim)return;
+     const el=e.target.closest('.q-card-gold');
+     if(cur&&cur!==el){cur.style.transform='';cur=null}
+     if(!el)return;cur=el;
+     const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+     el.style.transition='transform .25s ease-out';
+     el.style.transform=`perspective(1100px) rotateX(${(-y*2.6).toFixed(2)}deg) rotateY(${(x*2.6).toFixed(2)}deg)`;
+   });
+   document.addEventListener('mouseleave',()=>{if(cur){cur.style.transform='';cur=null}},true);
+ }
+ // المؤقت
+ $('#btnStartPause').onclick=()=>toggleTimer();
+ $('#btnResetTimer').onclick=()=>{resetTimer();toast('تمت إعادة ضبط المؤقّت','rotate-ccw')};
+ $('#btnPlus5').onclick=()=>adjustMinutes(5);
+ $('#btnMinus5').onclick=()=>adjustMinutes(-5);
+ $('#btnSound').onclick=()=>{state.settings.sound=!state.settings.sound;save();applySettings();
+   const sw=$('#setSound');if(sw)sw.checked=state.settings.sound;
+   if(state.settings.sound){ensureAudio();popSound()} toast(state.settings.sound?'الصوت مفعّل':'الصوت صامت',state.settings.sound?'volume-2':'volume-x')};
+ $('#btnFocusMode').onclick=openFocus;
+ $('#btnCalmCorner').onclick=openFocus;
+ $('#focusToggle').onclick=()=>toggleTimer();
+ $('#focusExit').onclick=closeFocus;
+ $$('#modeSeg button').forEach(b=>b.onclick=()=>setTimerMode(b.dataset.mode));
+ $$('.preset-btn').forEach(b=>b.onclick=()=>{
+   newSession(+b.dataset.preset);markPreset(+b.dataset.preset);
+   $('#timerQuote').textContent='«'+FOCUS_QUOTES[Math.floor(Math.random()*FOCUS_QUOTES.length)]+'»';
+ });
+ $('#btnCustomMin').onclick=()=>{const v=clamp(Math.round(+$('#customMin').value||0),1,480);
+   if(!v){toast('أدخلي عدد الدقائق','clock',true);return}newSession(v);markPreset(v)};
+ $('#timerSubject').onchange=e=>{
+   const v=e.target.value,t=T();
+   if(v==='free'){t.subjectId='free';t.subjectName='جلسة حرة'}
+   else if(v.startsWith('subj:')){t.subjectId=v;t.subjectName=v.slice(5)}
+   else{const task=state.schedule.find(x=>x.id===v);if(task){t.subjectId=task.id;t.subjectName=task.name;
+     if(!t.running&&t.remainingMs>=t.totalMs-500&&t.mode!=='pomodoro'){newSession(Math.max(5,durOf(task)),{subjectId:task.id,subjectName:task.name});markPreset(Math.round(t.totalMs/60000));return}}}
+   save();paintTimer();
+ };
+ $('#miniTimer').addEventListener('click',e=>{if(!e.target.closest('#miniToggle'))showView('timer')});
+ $('#miniToggle').onclick=e=>{e.stopPropagation();toggleTimer()};
+ // الجدول
+ $('#btnAddTask').onclick=()=>openTaskEditor();
+ $('#btnRandomSubject').onclick=pickRandomSubject;
+ $('#btnRescue').onclick=openRescue;
+ // المهام
+ $('#taskForm').addEventListener('submit',e=>{
+   e.preventDefault();const title=$('#taskTitle').value.trim();if(!title)return;
+   state.tasks.unshift({id:uid(),title,subject:$('#taskSubject').value,priority:$('#taskPriority').value,due:$('#taskDue').value,done:false,doneAt:'',pointsAwarded:false,created:Date.now()});
+   save();e.target.reset();$('#taskSubject').innerHTML=taskSubjectOptions();renderTasks();
+   toast('أُضيفت المهمة','plus',true);
+ });
+ ['fTaskSubject','fTaskPriority','fTaskStatus'].forEach(id=>$('#'+id).addEventListener('change',renderTasks));
+ // الملاحظات
+ $('#btnNewNote').onclick=()=>{editingNote='new';renderNoteEditor();const t=$('#neTitle');if(t)t.focus()};
+ $('#noteSearch').addEventListener('input',debounce(()=>renderNotes(),200));
+ // الرسائل الملكية
+ $('#loveEnv').addEventListener('click',()=>{loveOpen?closeLoveNote():openLoveNote(loveIdx<0)});
+ $('#btnNewLoveNote').onclick=()=>{if(loveOpen){closeLoveNote();setTimeout(()=>openLoveNote(true),480)}else openLoveNote(true)};
+ $('#btnFavLoveNote').onclick=e=>{
+   if(loveIdx<0){toast('افتحي رسالة أولاً','mail',true);return}
+   const n=LOVE_NOTES[loveIdx];
+   if(state.favNotes.some(x=>x.t===n.t)){toast('هذه الرسالة محفوظة مسبقاً','bookmark',true);return}
+   state.favNotes.push({t:n.t,by:n.by});save();renderFavNotes();burstAt(e.currentTarget,'spark');toast('حُفظت في رسائلك المفضلة','heart',true);
+ };
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){const t=T();if(t.running&&t.endAt)t.remainingMs=Math.max(0,t.endAt-Date.now());saveNow()}else timerTick()});
+ addEventListener('beforeunload',()=>{const t=T();if(t.running&&t.endAt)t.remainingMs=Math.max(0,t.endAt-Date.now());saveNow()});
+}
+function markPreset(min){$$('.preset-btn').forEach(b=>b.classList.toggle('on',+b.dataset.preset===min))}
+
+function init(){
+ // حقن الرسومات والحلقات
+ $('#timerBear').innerHTML=bearSVG('clock');
+ $('#focusBear').innerHTML=bearSVG('read');
+ $('#poetryRose').innerHTML=roseDecoSVG();
+ $('#ringMain').innerHTML=ringHTML(false);
+ $('#ringFocus').innerHTML=ringHTML(true);
+ $('#timerQuote').textContent='«'+FOCUS_QUOTES[0]+'»';
+ $('#focusQuote').textContent='«'+FOCUS_QUOTES[1]+'»';
+ $('#taskSubject').innerHTML=taskSubjectOptions();
+ $('#fTaskSubject').innerHTML=taskSubjectOptions(true);
+ buildTimerSubjects();
+ // مزامنة وضع المؤقت دون تصفير الجلسة المستعادة
+ $$('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.mode===T().mode));
+ if(T().mode==='pomodoro'){$('#presetRow').style.opacity=.45;$('#presetRow').style.pointerEvents='none'}
+ restoreTimer();markPreset(Math.round(T().totalMs/60000));
+ checkBadges(false);updatePointsUI();
+ bindSettings();applySettings();bindGlobal();
+ showView(state.ui.view&&$('#view-'+state.ui.view)?state.ui.view:'home');
+ setupWelcome();
+ petals.init();petals.start();
+ refreshIcons();
+ // حلقة المؤقت
+ const loop=()=>{timerTick();requestAnimationFrame(loop)};requestAnimationFrame(loop);
+ setInterval(()=>{timerTick();tickClock()},1000);
+ // مهام دورية: تحديث التحية والحالات الزمنية وتبدّل اليوم
+ let lastDay=todayKey();
+ setInterval(()=>{
+   if(!welcomeEntered)updateWelcomeGreeting();
+   const nowD=todayKey();
+   if(nowD!==lastDay){lastDay=nowD;checkBadges(false);showView(state.ui.view);toast('يوم دراسي جديد... صباح الإنجاز يا ملكة','sunrise',true);return}
+   const ae=document.activeElement;const typing=ae&&(ae.tagName==='TEXTAREA'||ae.tagName==='INPUT');
+   if(!typing&&welcomeEntered){
+     if(state.ui.view==='home')renderHome();
+     else if(state.ui.view==='schedule')renderSchedule();
+   }
+   refreshSideBear();updateMini();
+ },45000);
+}
+init();
+</script>
+</body>
+</html>
